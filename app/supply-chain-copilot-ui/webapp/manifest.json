@@ -1,0 +1,181 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "customer.supplychaincopilot.supplychaincopilotui",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.28.0",
+      "toolsId": "0cc0da29-ea0c-4c5f-980f-93533d4ad796"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/SupplyChainService/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "SupplyChain-display": {
+          "semanticObject": "SupplyChain",
+          "action": "display",
+          "title": "{{SupplyChain-display.flpTitle}}",
+          "subTitle": "{{SupplyChain-display.flpSubtitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "customer.supplychaincopilot.supplychaincopilotui.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "StockLevelsList",
+          "target": "StockLevelsList"
+        },
+        {
+          "pattern": "StockLevels({key}):?query:",
+          "name": "StockLevelsObjectPage",
+          "target": "StockLevelsObjectPage"
+        }
+      ],
+      "targets": {
+        "StockLevelsList": {
+          "type": "Component",
+          "id": "StockLevelsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/StockLevels",
+              "variantManagement": "Page",
+              "navigation": {
+                "StockLevels": {
+                  "detail": {
+                    "route": "StockLevelsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              },
+              "content": {
+                "header": {
+                  "actions": {
+                    "AIAnalyze": {
+                      "press": ".extension.customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockListExt.onAIAnalyze",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "AI Analyze"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "StockLevelsObjectPage": {
+          "type": "Component",
+          "id": "StockLevelsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/StockLevels"
+            }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController#customer.supplychaincopilot.supplychaincopilotui::StockLevelsList": {
+            "controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockListExt"
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  }
+}

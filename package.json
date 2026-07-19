@@ -1,0 +1,14 @@
+{
+  "name": "SupplyChainCopilot-cds",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@sap/cds-dk": "^9.9.3"
+  },
+  "dependencies": {
+    "@sap/cds": "^8.9.10",
+    "@sap/cds-compiler": "^6.9.3"
+  },
+  "sapux": [
+    "app/supply-chain-copilot-ui"
+  ]
+}

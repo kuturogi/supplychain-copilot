@@ -1,0 +1,6 @@
+{
+  "sap.app": {
+    "id": "customer.supplychaincopilot.ui",
+    "type": "application"
+  }
+}
