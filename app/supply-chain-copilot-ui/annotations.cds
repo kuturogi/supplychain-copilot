@@ -37,6 +37,12 @@ annotate service.StockLevels with @(
             Label : 'General Information',
             Target : '@UI.FieldGroup#GeneratedGroup',
         },
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'MovementsFacet',
+            Label : 'Stok Hareketleri',
+            Target : 'movements/@UI.LineItem',
+        },
     ],
 );
 

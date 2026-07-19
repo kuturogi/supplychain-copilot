@@ -106,6 +106,11 @@
           "pattern": "StockLevels({key}):?query:",
           "name": "StockLevelsObjectPage",
           "target": "StockLevelsObjectPage"
+        },
+        {
+          "pattern": "StockSummaryByStore:?query:",
+          "name": "StockSummaryList",
+          "target": "StockSummaryList"
         }
       ],
       "targets": {
@@ -117,6 +122,7 @@
             "settings": {
               "contextPath": "/StockLevels",
               "variantManagement": "Page",
+              "initialLoad": "Enabled",
               "navigation": {
                 "StockLevels": {
                   "detail": {
@@ -134,12 +140,49 @@
               "content": {
                 "header": {
                   "actions": {
+                    "AskCopilot": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onAskCopilot",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Copilot'a Sor"
+                    },
                     "AIAnalyze": {
-                      "press": ".extension.customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockListExt.onAIAnalyze",
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onAIAnalyze",
                       "visible": true,
                       "enabled": true,
                       "text": "AI Analyze"
+                    },
+                    "SupplierScorecard": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onSupplierScorecard",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Tedarikçi Karnesi"
+                    },
+                    "OpenDashboard": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenDashboard",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Dashboard"
                     }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "StockSummaryList": {
+          "type": "Component",
+          "id": "StockSummaryList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/StockSummaryByStore",
+              "variantManagement": "None",
+              "initialLoad": "Enabled",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
                   }
                 }
               }
@@ -153,7 +196,25 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/StockLevels"
+              "contextPath": "/StockLevels",
+              "content": {
+                "header": {
+                  "actions": {
+                    "ForecastDemand": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onForecastDemand",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Talep Tahmini (AI)"
+                    },
+                    "CreateOrder": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onCreateOrder",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Sipariş Oluştur"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -164,6 +225,9 @@
         "sap.ui.controllerExtensions": {
           "sap.fe.templates.ListReport.ListReportController#customer.supplychaincopilot.supplychaincopilotui::StockLevelsList": {
             "controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockListExt"
+          },
+          "sap.fe.templates.ObjectPage.ObjectPageController#customer.supplychaincopilot.supplychaincopilotui::StockLevelsObjectPage": {
+            "controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.ObjectPageExt"
           }
         }
       }

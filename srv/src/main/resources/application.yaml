@@ -8,6 +8,21 @@ cds:
   security:
     mock:
       enabled: false
+
+# SAP AI Core (Joule altyapısı) bağlantı yapılandırması
+# Bu değerleri BTP AI Core servis anahtarından alıp ortam değişkeni olarak set edin:
+#   AICORE_TOKEN_URL   → clientCredentialsTokenProvider.url + /oauth/token
+#   AICORE_CLIENT_ID   → clientCredentialsTokenProvider.clientId
+#   AICORE_CLIENT_SECRET → clientCredentialsTokenProvider.clientSecret
+#   AICORE_BASE_URL    → serviceurls.AI_API_URL
+#   AICORE_DEPLOYMENT_ID → AI Launchpad'den gpt-4o deployment ID
+aicore:
+  token-url: ${AICORE_TOKEN_URL:}
+  client-id: ${AICORE_CLIENT_ID:}
+  client-secret: ${AICORE_CLIENT_SECRET:}
+  base-url: ${AICORE_BASE_URL:}
+  deployment-id: ${AICORE_DEPLOYMENT_ID:}
+  resource-group: ${AICORE_RESOURCE_GROUP:default}
 ---
 management:
   endpoint:
