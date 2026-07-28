@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <!-- Mavi arka plan -->
+  <rect width="400" height="200" rx="16" fill="#0078D4"/>
+
+  <!-- NTT DATA logo ikonu: dış halka -->
+  <circle cx="72" cy="100" r="44" fill="none" stroke="#fff" stroke-width="10"/>
+  <!-- İç damla/göz şekli -->
+  <circle cx="72" cy="100" r="18" fill="#fff"/>
+  <circle cx="72" cy="82" r="9" fill="#0078D4"/>
+
+  <!-- NTT DATA yazısı -->
+  <text x="132" y="116"
+        font-family="'Segoe UI', Arial, sans-serif"
+        font-size="54"
+        font-weight="700"
+        fill="#fff"
+        letter-spacing="1">NTT DATA</text>
+</svg>

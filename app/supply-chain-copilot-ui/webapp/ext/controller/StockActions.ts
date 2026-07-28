@@ -474,14 +474,13 @@ function _buildKpiHtml(rows: StoreSummaryRow[]): string {
                     <span class="stDashSectionIcon">📊</span>
                     <span class="stDashSectionTitle">Genel Bakış</span>
                     <div class="stNttBadgeInline">
-                        <svg viewBox="0 0 140 34" xmlns="http://www.w3.org/2000/svg" width="120" height="30">
-                            <rect width="140" height="34" rx="6" fill="#003087"/>
-                            <text x="8" y="13" font-family="Arial,sans-serif" font-size="10.5" font-weight="900" fill="#fff" letter-spacing="1">NTT DATA</text>
-                            <text x="8" y="26" font-family="Arial,sans-serif" font-size="7" fill="#7eb3f5" letter-spacing="0.3">Business Solutions</text>
-                            <circle cx="128" cy="17" r="7" fill="#e4002b"/>
-                            <circle cx="128" cy="17" r="4" fill="#fff"/>
-                            <circle cx="128" cy="17" r="2" fill="#e4002b"/>
-                        </svg>
+                        <div class="stNttBrandBadge">
+                            <img src="img/nttdata-logo.svg" class="stNttBrandLogo" alt="NTT DATA"/>
+                            <div class="stNttBrandText">
+                                <span class="stNttBrandTitle">NTT DATA Business Solutions Turkey</span>
+                                <span class="stNttBrandSub">CoE Team</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="stKpiGrid2">${cardsHtml}</div>

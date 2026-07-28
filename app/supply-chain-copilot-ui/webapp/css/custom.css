@@ -2,6 +2,67 @@
    Supply Chain Copilot — Custom Styles
    ============================================================ */
 
+/* ── NTT DATA Marka Badge (Dashboard Header) ───────────────── */
+
+.stNttBadgeInline {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.stNttBrandBadge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f0f6ff;
+    border: 1px solid #c8dff8;
+    border-radius: 10px;
+    padding: 6px 12px 6px 8px;
+}
+
+.stNttBrandLogo {
+    height: 32px;
+    width: auto;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.stNttBrandText {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.stNttBrandTitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #0078D4;
+    white-space: nowrap;
+    line-height: 1.3;
+}
+
+.stNttBrandSub {
+    font-size: 0.65rem;
+    color: #6b7280;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.stNttBadge {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.stNttLogo {
+    width: 120px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
+}
+
 /* ── AI Result Dialog ──────────────────────────────────────── */
 
 .stAiDialogIcon {

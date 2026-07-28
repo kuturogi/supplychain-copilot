@@ -16,16 +16,44 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 32px;
-            background: #f5f7fa;
-            border-top: 2px solid #003087;
+            height: 44px;
+            background: #fff;
+            border-top: 3px solid #0078D4;
             display: flex;
             align-items: center;
-            padding: 0 16px;
-            font-family: Arial, sans-serif;
-            font-size: 0.78rem;
+            gap: 12px;
+            padding: 0 20px;
+            font-family: 'Segoe UI', Arial, sans-serif;
             z-index: 9998;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 -2px 12px rgba(0,100,200,0.10);
+        }
+
+        #stNttFooterLogo {
+            height: 28px;
+            width: auto;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        #stNttFooterText {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        #stNttFooterTitle {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #0078D4;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+        }
+
+        #stNttFooterSub {
+            font-size: 0.67rem;
+            color: #6b7280;
+            letter-spacing: 0.03em;
+            line-height: 1.2;
         }
 
         /* Tema değiştirme butonu */
@@ -88,14 +116,11 @@
 
     <!-- NTT DATA marka bandı -->
     <div id="stNttFooter">
-        <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:6px">
-            <rect width="24" height="24" rx="4" fill="#003087"/>
-            <circle cx="19" cy="12" r="4" fill="#e4002b"/>
-            <circle cx="19" cy="12" r="2.2" fill="#fff"/>
-            <circle cx="19" cy="12" r="1" fill="#e4002b"/>
-        </svg>
-        <span style="font-weight:700;color:#003087;margin-right:4px">NTT DATA</span>
-        <span style="color:#555">Business Solutions &mdash; Supply Chain Copilot</span>
+        <img src="img/nttdata-logo.svg" alt="NTT DATA" id="stNttFooterLogo"/>
+        <div id="stNttFooterText">
+            <span id="stNttFooterTitle">NTT DATA Business Solutions Turkey</span>
+            <span id="stNttFooterSub">CoE Team &nbsp;·&nbsp; Supply Chain Copilot</span>
+        </div>
     </div>
 
     <!-- Tema değiştirme butonu -->
