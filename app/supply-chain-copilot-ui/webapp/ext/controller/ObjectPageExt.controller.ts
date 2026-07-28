@@ -22,7 +22,19 @@ export default class ObjectPageExt extends ControllerExtension<any> {
             console.log("ObjectPageExt Controller Extension yüklendi.");
         },
         onAfterRendering(this: ObjectPageExt): void {
-            this._renderTrendChart();
+            const view = this.getView();
+            if (!view) return;
+            // Binding context zaten varsa hemen çiz
+            if (view.getBindingContext()) {
+                this._renderTrendChart();
+                return;
+            }
+            // Context yoksa event dinle — setAssociation hatasını önler
+            view.attachEventOnce("modelContextChange", () => {
+                if (view.getBindingContext()) {
+                    this._renderTrendChart();
+                }
+            });
         }
     };
 
