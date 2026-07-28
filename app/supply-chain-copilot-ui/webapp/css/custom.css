@@ -675,3 +675,126 @@
 .stNotifMarkAllBtn {
     font-size: 0.78rem;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   Analitik Grafik Paneli
+   ══════════════════════════════════════════════════════════════ */
+
+.stChartSectionTitle {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #32363a;
+    margin: 1.25rem 0 0.75rem 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #e8e8e8;
+}
+
+/* 2 sütunlu grid, dar ekranda 1 sütun */
+.stChartsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Tek grafik kartı */
+.stChartCard {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 0.75rem;
+    padding: 1rem 1.1rem 0.85rem 1.1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.stChartTitle {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #32363a;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 0.4rem;
+}
+
+/* Boş durum */
+.stChartEmpty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    color: #9a9a9a;
+    font-style: italic;
+}
+
+/* Legand satırı */
+.stChartLegendRow {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ── Pasta Grafiği ─────────────────────────────────────────── */
+
+.stPieWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.stPieSvg {
+    flex-shrink: 0;
+}
+
+.stPieLegend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.stPieLegendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: #32363a;
+}
+
+.stPieLegendDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.stPieLegendLabel {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stPieLegendValue {
+    font-weight: 600;
+    color: #0064d9;
+    white-space: nowrap;
+}
+
+/* ── Bar & Funnel SVG ──────────────────────────────────────── */
+
+.stBarSvg,
+.stFunnelSvg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+}
