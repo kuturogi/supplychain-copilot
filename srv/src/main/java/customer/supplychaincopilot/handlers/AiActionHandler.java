@@ -37,16 +37,24 @@ public class AiActionHandler implements EventHandler {
     public String analyzeStockWithAI() {
         System.out.println("analyzeStockWithAI çağrıldı");
         StockDataRepository.StockData data = repo.loadStockData();
+        String result;
 
         if (aiCore.isConfigured()) {
             try {
-                return aiCore.chat(promptBuilder.buildAnalysisPrompt(data));
+                result = aiCore.chat(promptBuilder.buildAnalysisPrompt(data));
             } catch (Exception e) {
                 System.err.println("AI Core hatası: " + e.getMessage());
                 return "SAP AI Core bağlantısında hata: " + e.getMessage();
             }
+        } else {
+            result = demoBuilder.buildAnalysisReport(data);
         }
-        return demoBuilder.buildAnalysisReport(data);
+
+        int criticalCount = (int) data.stockLevels().stream()
+            .filter(s -> repo.toInt(s.get("quantity")) <= repo.toInt(s.get("criticalThreshold")))
+            .count();
+        saveAnalysisLog("StokAnaliz", null, result, criticalCount);
+        return result;
     }
 
     // ─── Talep Tahmini ───────────────────────────────────────────────────────────
@@ -90,15 +98,20 @@ public class AiActionHandler implements EventHandler {
         if (question.isEmpty()) return "Lütfen bir soru yazın. Örnek: \"Hangi ürünler kritik durumda?\"";
 
         StockDataRepository.StockData data = repo.loadStockData();
+        String result;
 
         if (aiCore.isConfigured()) {
             try {
-                return aiCore.chat(promptBuilder.buildCopilotPrompt(question, data));
+                result = aiCore.chat(promptBuilder.buildCopilotPrompt(question, data));
             } catch (Exception e) {
                 return "SAP AI Core bağlantısında hata: " + e.getMessage();
             }
+        } else {
+            result = demoBuilder.answerWithRules(question, data);
         }
-        return demoBuilder.answerWithRules(question, data);
+
+        saveAnalysisLog("Copilot", question, result, -1);
+        return result;
     }
 
     // ─── Tedarikçi Karnesi ───────────────────────────────────────────────────────
@@ -229,5 +242,22 @@ public class AiActionHandler implements EventHandler {
             quantity, quantitySource, deliveryText, orderId);
 
         return redirectNote != null ? response + "\n\n" + redirectNote : response;
+    }
+
+    // ─── Analiz Kaydı ────────────────────────────────────────────────────────────
+
+    private void saveAnalysisLog(String type, String question, String result, int criticalCount) {
+        try {
+            Map<String, Object> log = new HashMap<>();
+            log.put("ID", UUID.randomUUID().toString());
+            log.put("analysisType", type);
+            log.put("question", question);
+            log.put("result", result);
+            log.put("createdAt", java.time.Instant.now());
+            log.put("criticalCount", criticalCount >= 0 ? criticalCount : null);
+            db.run(Insert.into("my.supplychain.AnalysisLog").entry(log));
+        } catch (Exception e) {
+            System.err.println("Analiz kaydı hatası: " + e.getMessage());
+        }
     }
 }

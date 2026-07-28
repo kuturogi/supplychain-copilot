@@ -391,3 +391,56 @@ annotate SupplyChainService.Products with @(
         }
     }
 );
+
+// ─── AnalysisLog — AI Analiz Geçmişi ─────────────────────────────────────────
+
+annotate SupplyChainService.AnalysisLogs with @(
+    UI: {
+        HeaderInfo: {
+            TypeName: 'Analiz Kaydı',
+            TypeNamePlural: 'AI Analiz Geçmişi'
+        },
+        LineItem: [
+            {
+                $Type: 'UI.DataField',
+                Value: createdAt,
+                Label: 'Tarih'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: analysisType,
+                Label: 'Tür'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: question,
+                Label: 'Soru / Tetikleyici'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: criticalCount,
+                Label: 'Kritik Ürün Sayısı'
+            }
+        ],
+        Facets: [
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: 'Analiz Sonucu',
+                Target: '@UI.FieldGroup#LogDetail'
+            }
+        ],
+        FieldGroup #LogDetail: {
+            Data: [
+                { $Type: 'UI.DataField', Value: analysisType,  Label: 'Tür'              },
+                { $Type: 'UI.DataField', Value: createdAt,     Label: 'Tarih'            },
+                { $Type: 'UI.DataField', Value: question,      Label: 'Soru'             },
+                { $Type: 'UI.DataField', Value: criticalCount, Label: 'Kritik Ürün'      },
+                { $Type: 'UI.DataField', Value: result,        Label: 'Sonuç'            }
+            ]
+        },
+        PresentationVariant: {
+            SortOrder: [{ Property: createdAt, Descending: true }],
+            Visualizations: ['@UI.LineItem']
+        }
+    }
+);

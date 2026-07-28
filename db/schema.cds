@@ -64,3 +64,12 @@ entity Notification {
     createdAt : DateTime;
     isRead    : Boolean;
 }
+
+entity AnalysisLog {
+    key ID        : UUID;
+    analysisType  : String;    // StokAnaliz | TalepTahmini | Copilot | TedarikciKarnesi
+    question      : String;    // Copilot sorusu veya tetikleyen stok ID
+    result        : LargeString;
+    createdAt     : DateTime;
+    criticalCount : Integer;   // analiz anındaki kritik ürün sayısı
+}

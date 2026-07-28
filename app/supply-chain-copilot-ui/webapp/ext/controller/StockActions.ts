@@ -112,6 +112,28 @@ export function onOpenProducts(this: any): void {
     }
 }
 
+export async function onBulkOrder(this: any): Promise<void> {
+    const model = this.getModel() as ODataModel;
+    const result = await runWithBusy("Kritik stoklar için siparişler oluşturuluyor...", async () => {
+        const binding = model.bindContext("/createBulkOrders(...)");
+        await binding.execute();
+        return (binding.getBoundContext()?.getObject() as { value?: string })?.value;
+    });
+    if (result !== undefined) {
+        openAIResultDialog({ title: "Toplu Sipariş Raporu", text: result, state: "Success" });
+        model.refresh();
+    }
+}
+
+export function onOpenAnalysisLog(this: any): void {
+    try {
+        this.routing.navigateToRoute("AnalysisLogsList");
+    } catch {
+        const base = window.location.hash.split("&/")[0];
+        window.location.hash = base + "&/AnalysisLogs";
+    }
+}
+
 // ─── Copilot Chat Dialog ─────────────────────────────────────────────────────
 
 interface ChatMessage {

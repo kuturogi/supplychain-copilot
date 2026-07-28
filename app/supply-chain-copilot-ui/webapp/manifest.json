@@ -136,6 +136,11 @@
           "pattern": "Products:?query:",
           "name": "ProductsList",
           "target": "ProductsList"
+        },
+        {
+          "pattern": "AnalysisLogs:?query:",
+          "name": "AnalysisLogsList",
+          "target": "AnalysisLogsList"
         }
       ],
       "targets": {
@@ -206,6 +211,18 @@
                       "visible": true,
                       "enabled": true,
                       "text": "Ürünler"
+                    },
+                    "BulkOrder": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onBulkOrder",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Toplu Sipariş"
+                    },
+                    "OpenAnalysisLog": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenAnalysisLog",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Analiz Geçmişi"
                     }
                   }
                 }
@@ -274,6 +291,23 @@
                       "text": "Sipariş Oluştur"
                     }
                   }
+                }
+              }
+            }
+          }
+        },
+        "AnalysisLogsList": {
+          "type": "Component",
+          "id": "AnalysisLogsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/AnalysisLogs",
+              "variantManagement": "None",
+              "initialLoad": "Enabled",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": { "type": "ResponsiveTable" }
                 }
               }
             }

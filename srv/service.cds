@@ -11,6 +11,8 @@ service SupplyChainService {
     entity Suppliers as projection on supplychain.Supplier;
     entity PurchaseOrders as projection on supplychain.PurchaseOrder;
     entity Notifications as projection on supplychain.Notification;
+    @readonly
+    entity AnalysisLogs as projection on supplychain.AnalysisLog;
 
     // Mağaza bazlı özet: toplam stok, kritik ürün sayısı, toplam stok değeri.
     // summaryCriticality veritabanında null'dur; backend handler'ı okuma sırasında doldurur.
@@ -42,4 +44,6 @@ service SupplyChainService {
     action approvePurchaseOrder(orderId: UUID) returns String;
     action markOrderDelivered(orderId: UUID) returns String;
     action cancelPurchaseOrder(orderId: UUID) returns String;
+    // Toplu sipariş — tüm kritik stoklar için otomatik sipariş oluştur
+    action createBulkOrders() returns String;
 }
