@@ -29,3 +29,7 @@ hs_err*
 .vscode
 .idea
 .reloadtrigger
+
+# UI5 build outputs
+app/supply-chain-copilot-ui/dist/
+srv/src/main/resources/static/
