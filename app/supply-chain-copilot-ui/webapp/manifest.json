@@ -64,7 +64,8 @@
         "sap.m": {},
         "sap.ui.core": {},
         "sap.fe.templates": {},
-        "sap.f": {}
+        "sap.f": {},
+        "sap.ui.layout": {}
       }
     },
     "contentDensities": {
@@ -299,18 +300,6 @@
                       "visible": true,
                       "enabled": true,
                       "text": "Yenile"
-                    }
-                  }
-                },
-                "body": {
-                  "sections": {
-                    "DashboardSection": {
-                      "template": "customer.supplychaincopilot.supplychaincopilotui.ext.fragment.DashboardPanel",
-                      "position": {
-                        "placement": "Before",
-                        "anchor": "StandardSection"
-                      },
-                      "title": "Dashboard"
                     }
                   }
                 }

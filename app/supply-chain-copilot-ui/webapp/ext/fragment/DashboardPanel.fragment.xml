@@ -5,10 +5,11 @@
 
     <VBox id="stDashboardPanel" class="stDashboardKpiPanel">
         <HBox class="stDashboardHeader">
-            <VBox>
+            <VBox class="stDashboardHeaderLeft" wrappingType="Normal">
                 <Title text="📊 Tedarik Zinciri Dashboard" level="H2" class="stDashboardTitle"/>
                 <Text text="Mağaza stok özeti ve analitik göstergeler" class="stDashboardSubtitle"/>
             </VBox>
+            <core:HTML content="&lt;div class='stNttBadge'&gt;&lt;svg class='stNttLogo' viewBox='0 0 120 36' xmlns='http://www.w3.org/2000/svg'&gt;&lt;rect width='120' height='36' rx='6' fill='#003087'/&gt;&lt;text x='8' y='14' font-family='Arial,sans-serif' font-size='11' font-weight='900' fill='#fff' letter-spacing='1'&gt;NTT DATA&lt;/text&gt;&lt;text x='8' y='28' font-family='Arial,sans-serif' font-size='7.5' fill='#7eb3f5' letter-spacing='0.3'&gt;Business Solutions&lt;/text&gt;&lt;circle cx='108' cy='18' r='7' fill='#e4002b'/&gt;&lt;circle cx='108' cy='18' r='4' fill='#fff'/&gt;&lt;circle cx='108' cy='18' r='2' fill='#e4002b'/&gt;&lt;/svg&gt;&lt;/div&gt;"/>
         </HBox>
 
         <!-- KPI Grid -->

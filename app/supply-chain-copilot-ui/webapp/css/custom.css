@@ -789,6 +789,37 @@
     white-space: nowrap;
 }
 
+/* ── Dashboard Dialog ──────────────────────────────────────── */
+
+.stDashboardDialog .sapMDialogScrollCont {
+    overflow: hidden;
+}
+
+.stDashboardDialogBody {
+    padding: 1rem 1.25rem;
+}
+
+.stNttBadgeInline {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+/* ── NTT DATA Marka Rozeti (Dashboard Header) ──────────────── */
+
+.stNttBadge {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.stNttLogo {
+    width: 130px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.18));
+}
+
 /* ── Bar & Funnel SVG ──────────────────────────────────────── */
 
 .stBarSvg,
