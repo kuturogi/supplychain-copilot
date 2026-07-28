@@ -1,3 +1,5 @@
+using { cuid, managed } from '@sap/cds/common';
+
 namespace my.supplychain;
 
 entity Store {

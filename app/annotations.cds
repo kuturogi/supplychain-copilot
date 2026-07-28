@@ -392,6 +392,48 @@ annotate SupplyChainService.Products with @(
     }
 );
 
+// ─── Stores — Liste + ObjectPage ─────────────────────────────────────────────
+
+annotate SupplyChainService.Stores with @(
+    UI: {
+        HeaderInfo: {
+            TypeName: 'Mağaza',
+            TypeNamePlural: 'Mağazalar'
+        },
+        LineItem: [
+            {
+                $Type: 'UI.DataField',
+                Value: name,
+                Label: 'Mağaza Adı'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: location,
+                Label: 'Konum'
+            }
+        ],
+        Facets: [
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: 'Mağaza Bilgileri',
+                Target: '@UI.FieldGroup#StoreDetail'
+            },
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: 'Stok Seviyeleri',
+                Target: 'stockLevels/@UI.LineItem'
+            }
+        ],
+        FieldGroup #StoreDetail: {
+            Data: [
+                { $Type: 'UI.DataField', Value: ID,       Label: 'Mağaza No' },
+                { $Type: 'UI.DataField', Value: name,     Label: 'Ad'        },
+                { $Type: 'UI.DataField', Value: location, Label: 'Konum'     }
+            ]
+        }
+    }
+);
+
 // ─── AnalysisLog — AI Analiz Geçmişi ─────────────────────────────────────────
 
 annotate SupplyChainService.AnalysisLogs with @(

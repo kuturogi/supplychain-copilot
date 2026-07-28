@@ -134,6 +134,15 @@ export function onOpenAnalysisLog(this: any): void {
     }
 }
 
+export function onOpenStores(this: any): void {
+    try {
+        this.routing.navigateToRoute("StoresList");
+    } catch {
+        const base = window.location.hash.split("&/")[0];
+        window.location.hash = base + "&/Stores";
+    }
+}
+
 // ─── Copilot Chat Dialog ─────────────────────────────────────────────────────
 
 interface ChatMessage {

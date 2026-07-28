@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,32 @@
     <style>
         html, body, body > div, #container, #container-uiarea {
             height: 100%;
+        }
+
+        /* Tema değiştirme butonu */
+        #stThemeToggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background: #0064d9;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        #stThemeToggle:hover {
+            background: #0058c4;
+            transform: scale(1.08);
         }
     </style>
     <script
@@ -22,6 +48,14 @@
         data-sap-ui-async="true"
         data-sap-ui-frame-options="trusted"
     ></script>
+    <script>
+        // Tema tercihini localStorage'dan yükle
+        (function () {
+            var saved = localStorage.getItem("stTheme") || "sap_horizon";
+            document.getElementById("sap-ui-bootstrap")
+                    .setAttribute("data-sap-ui-theme", saved);
+        })();
+    </script>
 </head>
 <body class="sapUiBody sapUiSizeCompact" id="content">
     <div
@@ -31,5 +65,34 @@
         data-settings='{"id" : "customer.supplychaincopilot.supplychaincopilotui"}'
         data-handle-validation="true"
     ></div>
+
+    <!-- Tema değiştirme butonu -->
+    <button id="stThemeToggle" title="Temayı değiştir">🌙</button>
+
+    <script>
+        document.getElementById("stThemeToggle").addEventListener("click", function () {
+            var current = sap.ui.getCore
+                ? sap.ui.getCore().getConfiguration().getTheme()
+                : localStorage.getItem("stTheme") || "sap_horizon";
+
+            var next = current === "sap_horizon" ? "sap_horizon_dark" : "sap_horizon";
+            localStorage.setItem("stTheme", next);
+
+            this.textContent = next === "sap_horizon_dark" ? "☀️" : "🌙";
+
+            if (sap && sap.ui && sap.ui.getCore) {
+                sap.ui.getCore().applyTheme(next);
+            } else {
+                location.reload();
+            }
+        });
+
+        // Sayfa yüklendiğinde butonu güncelle
+        window.addEventListener("load", function () {
+            var saved = localStorage.getItem("stTheme") || "sap_horizon";
+            document.getElementById("stThemeToggle").textContent =
+                saved === "sap_horizon_dark" ? "☀️" : "🌙";
+        });
+    </script>
 </body>
 </html>

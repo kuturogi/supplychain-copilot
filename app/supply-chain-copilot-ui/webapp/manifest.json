@@ -141,6 +141,16 @@
           "pattern": "AnalysisLogs:?query:",
           "name": "AnalysisLogsList",
           "target": "AnalysisLogsList"
+        },
+        {
+          "pattern": "Stores:?query:",
+          "name": "StoresList",
+          "target": "StoresList"
+        },
+        {
+          "pattern": "Stores({key}):?query:",
+          "name": "StoresObjectPage",
+          "target": "StoresObjectPage"
         }
       ],
       "targets": {
@@ -223,6 +233,12 @@
                       "visible": true,
                       "enabled": true,
                       "text": "Analiz Geçmişi"
+                    },
+                    "OpenStores": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenStores",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Mağazalar"
                     }
                   }
                 }
@@ -308,6 +324,74 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": { "type": "ResponsiveTable" }
+                }
+              }
+            }
+          }
+        },
+        "StoresList": {
+          "type": "Component",
+          "id": "StoresList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Stores",
+              "variantManagement": "None",
+              "initialLoad": "Enabled",
+              "navigation": {
+                "Stores": {
+                  "detail": { "route": "StoresObjectPage" }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": { "type": "ResponsiveTable" }
+                }
+              }
+            }
+          }
+        },
+        "StoresObjectPage": {
+          "type": "Component",
+          "id": "StoresObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Stores"
+            }
+          }
+        },
+        "PurchaseOrdersObjectPage": {
+          "type": "Component",
+          "id": "PurchaseOrdersObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": true,
+              "contextPath": "/PurchaseOrders",
+              "content": {
+                "header": {
+                  "actions": {
+                    "ApproveOrder": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.OrderActions.onApproveOrder",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Onayla"
+                    },
+                    "MarkDelivered": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.OrderActions.onMarkDelivered",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Teslim Edildi"
+                    },
+                    "CancelOrder": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.OrderActions.onCancelOrder",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "İptal Et"
+                    }
+                  }
                 }
               }
             }

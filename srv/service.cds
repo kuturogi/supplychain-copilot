@@ -9,6 +9,7 @@ service SupplyChainService {
     entity StockLevels as projection on supplychain.StockLevel;
     entity StockMovements as projection on supplychain.StockMovement;
     entity Suppliers as projection on supplychain.Supplier;
+    @odata.draft.enabled
     entity PurchaseOrders as projection on supplychain.PurchaseOrder;
     entity Notifications as projection on supplychain.Notification;
     @readonly
