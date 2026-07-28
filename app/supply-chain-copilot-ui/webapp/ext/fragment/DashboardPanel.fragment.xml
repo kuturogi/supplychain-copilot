@@ -1,0 +1,28 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+
+    <VBox id="stDashboardPanel" class="stDashboardKpiPanel">
+        <HBox class="stDashboardHeader">
+            <VBox>
+                <Title text="📊 Tedarik Zinciri Dashboard" level="H2" class="stDashboardTitle"/>
+                <Text text="Mağaza stok özeti ve analitik göstergeler" class="stDashboardSubtitle"/>
+            </VBox>
+        </HBox>
+
+        <!-- KPI Grid -->
+        <FlexBox wrap="Wrap" class="stKpiGrid" id="stKpiGrid"/>
+
+        <!-- Spark Rows -->
+        <VBox class="stSparkSection">
+            <Text text="Mağaza Bazlı Stok Dağılımı" class="stSparkSection__title"/>
+            <VBox id="stSparkRows"/>
+        </VBox>
+
+        <!-- Charts -->
+        <Text text="📈 Analitik Grafikler" class="stChartSectionTitle"/>
+        <FlexBox wrap="Wrap" class="stChartsGrid" id="stChartsGrid"/>
+    </VBox>
+
+</core:FragmentDefinition>

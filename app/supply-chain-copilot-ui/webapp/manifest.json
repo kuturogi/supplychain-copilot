@@ -301,6 +301,18 @@
                       "text": "Yenile"
                     }
                   }
+                },
+                "body": {
+                  "sections": {
+                    "DashboardSection": {
+                      "template": "customer.supplychaincopilot.supplychaincopilotui.ext.fragment.DashboardPanel",
+                      "position": {
+                        "placement": "Before",
+                        "anchor": "StandardSection"
+                      },
+                      "title": "Dashboard"
+                    }
+                  }
                 }
               }
             }
