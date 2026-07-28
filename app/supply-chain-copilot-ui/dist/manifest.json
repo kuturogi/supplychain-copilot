@@ -1,0 +1,592 @@
+{
+	"_version": "1.60.0",
+	"sap.app": {
+		"id": "customer.supplychaincopilot.supplychaincopilotui",
+		"type": "application",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [
+				""
+			]
+		},
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "@sap/generator-fiori:lrop",
+			"version": "1.28.0",
+			"toolsId": "0cc0da29-ea0c-4c5f-980f-93533d4ad796"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/SupplyChainService/",
+				"type": "OData",
+				"settings": {
+					"annotations": [],
+					"odataVersion": "4.0"
+				}
+			}
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"SupplyChain-display": {
+					"semanticObject": "SupplyChain",
+					"action": "display",
+					"title": "{{SupplyChain-display.flpTitle}}",
+					"subTitle": "{{SupplyChain-display.flpSubtitle}}",
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					}
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": true,
+		"dependencies": {
+			"minUI5Version": "1.120.0",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.fe.templates": {},
+				"sap.f": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "customer.supplychaincopilot.supplychaincopilotui.i18n.i18n",
+					"supportedLocales": [
+						""
+					]
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true
+				}
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties",
+				"settings": {
+					"supportedLocales": [
+						""
+					]
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/custom.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {},
+			"routes": [
+				{
+					"pattern": ":?query:",
+					"name": "StockLevelsList",
+					"target": "StockLevelsList"
+				},
+				{
+					"pattern": "StockLevels({key}):?query:",
+					"name": "StockLevelsObjectPage",
+					"target": "StockLevelsObjectPage"
+				},
+				{
+					"pattern": "StockSummaryByStore:?query:",
+					"name": "StockSummaryList",
+					"target": "StockSummaryList"
+				},
+				{
+					"pattern": "PurchaseOrders:?query:",
+					"name": "PurchaseOrdersList",
+					"target": "PurchaseOrdersList"
+				},
+				{
+					"pattern": "PurchaseOrders({key}):?query:",
+					"name": "PurchaseOrdersObjectPage",
+					"target": "PurchaseOrdersObjectPage"
+				},
+				{
+					"pattern": "Suppliers:?query:",
+					"name": "SuppliersList",
+					"target": "SuppliersList"
+				},
+				{
+					"pattern": "Products:?query:",
+					"name": "ProductsList",
+					"target": "ProductsList"
+				},
+				{
+					"pattern": "AnalysisLogs:?query:",
+					"name": "AnalysisLogsList",
+					"target": "AnalysisLogsList"
+				},
+				{
+					"pattern": "Stores:?query:",
+					"name": "StoresList",
+					"target": "StoresList"
+				},
+				{
+					"pattern": "Stores({key}):?query:",
+					"name": "StoresObjectPage",
+					"target": "StoresObjectPage"
+				},
+				{
+					"pattern": "Notifications:?query:",
+					"name": "NotificationsList",
+					"target": "NotificationsList"
+				}
+			],
+			"targets": {
+				"StockLevelsList": {
+					"type": "Component",
+					"id": "StockLevelsList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/StockLevels",
+							"variantManagement": "Page",
+							"initialLoad": "Enabled",
+							"navigation": {
+								"StockLevels": {
+									"detail": {
+										"route": "StockLevelsObjectPage"
+									}
+								}
+							},
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							},
+							"content": {
+								"header": {
+									"actions": {
+										"AskCopilot": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onAskCopilot",
+											"visible": true,
+											"enabled": true,
+											"text": "Copilot'a Sor"
+										},
+										"AIAnalyze": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onAIAnalyze",
+											"visible": true,
+											"enabled": true,
+											"text": "AI Analyze"
+										},
+										"SupplierScorecard": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onSupplierScorecard",
+											"visible": true,
+											"enabled": true,
+											"text": "Tedarikçi Karnesi"
+										},
+										"OpenDashboard": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenDashboard",
+											"visible": true,
+											"enabled": true,
+											"text": "Dashboard"
+										},
+										"OpenOrders": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenOrders",
+											"visible": true,
+											"enabled": true,
+											"text": "Siparişler"
+										},
+										"OpenSuppliers": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenSuppliers",
+											"visible": true,
+											"enabled": true,
+											"text": "Tedarikçiler"
+										},
+										"OpenProducts": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenProducts",
+											"visible": true,
+											"enabled": true,
+											"text": "Ürünler"
+										},
+										"BulkOrder": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onBulkOrder",
+											"visible": true,
+											"enabled": true,
+											"text": "Toplu Sipariş"
+										},
+										"OpenAnalysisLog": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenAnalysisLog",
+											"visible": true,
+											"enabled": true,
+											"text": "Analiz Geçmişi"
+										},
+										"OpenStores": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenStores",
+											"visible": true,
+											"enabled": true,
+											"text": "Mağazalar"
+										},
+										"ExportCritical": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onExportCritical",
+											"visible": true,
+											"enabled": true,
+											"text": "Kritik Export"
+										},
+										"ExportAll": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onExportAll",
+											"visible": true,
+											"enabled": true,
+											"text": "Tüm Stok Export"
+										},
+										"OpenNotifications": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenNotifications",
+											"visible": true,
+											"enabled": true,
+											"text": "Bildirimler"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"StockSummaryList": {
+					"type": "Component",
+					"id": "StockSummaryList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/StockSummaryByStore",
+							"variantManagement": "None",
+							"initialLoad": "Enabled",
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							},
+							"content": {
+								"header": {
+									"actions": {
+										"AnalyzeDashboard": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.DashboardExt.onAnalyzeDashboard",
+											"visible": true,
+											"enabled": true,
+											"text": "AI Analiz"
+										},
+										"RefreshDashboard": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.DashboardExt.onRefreshDashboard",
+											"visible": true,
+											"enabled": true,
+											"text": "Yenile"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"StockLevelsObjectPage": {
+					"type": "Component",
+					"id": "StockLevelsObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"editableHeaderContent": false,
+							"contextPath": "/StockLevels",
+							"content": {
+								"header": {
+									"actions": {
+										"ForecastDemand": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onForecastDemand",
+											"visible": true,
+											"enabled": true,
+											"text": "Talep Tahmini (AI)"
+										},
+										"CreateOrder": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onCreateOrder",
+											"visible": true,
+											"enabled": true,
+											"text": "Sipariş Oluştur"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"AnalysisLogsList": {
+					"type": "Component",
+					"id": "AnalysisLogsList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/AnalysisLogs",
+							"variantManagement": "None",
+							"initialLoad": "Enabled",
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							}
+						}
+					}
+				},
+				"PurchaseOrdersList": {
+					"type": "Component",
+					"id": "PurchaseOrdersList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/PurchaseOrders",
+							"variantManagement": "Page",
+							"initialLoad": "Enabled",
+							"navigation": {
+								"PurchaseOrders": {
+									"detail": {
+										"route": "PurchaseOrdersObjectPage"
+									}
+								}
+							},
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							},
+							"content": {
+								"header": {
+									"actions": {
+										"ExportOrders": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.OrderActions.onExportOrders",
+											"visible": true,
+											"enabled": true,
+											"text": "Export (CSV)"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"StoresList": {
+					"type": "Component",
+					"id": "StoresList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/Stores",
+							"variantManagement": "None",
+							"initialLoad": "Enabled",
+							"navigation": {
+								"Stores": {
+									"detail": {
+										"route": "StoresObjectPage"
+									}
+								}
+							},
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							}
+						}
+					}
+				},
+				"StoresObjectPage": {
+					"type": "Component",
+					"id": "StoresObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"editableHeaderContent": false,
+							"contextPath": "/Stores"
+						}
+					}
+				},
+				"NotificationsList": {
+					"type": "Component",
+					"id": "NotificationsList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/Notifications",
+							"variantManagement": "None",
+							"initialLoad": "Enabled",
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							},
+							"content": {
+								"header": {
+									"actions": {
+										"MarkAllRead": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onMarkAllNotificationsRead",
+											"visible": true,
+											"enabled": true,
+											"text": "Tümünü Okundu İşaretle"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"PurchaseOrdersObjectPage": {
+					"type": "Component",
+					"id": "PurchaseOrdersObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"editableHeaderContent": true,
+							"contextPath": "/PurchaseOrders",
+							"content": {
+								"header": {
+									"actions": {
+										"ApproveOrder": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.OrderActions.onApproveOrder",
+											"visible": true,
+											"enabled": true,
+											"text": "Onayla"
+										},
+										"MarkDelivered": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.OrderActions.onMarkDelivered",
+											"visible": true,
+											"enabled": true,
+											"text": "Teslim Edildi"
+										},
+										"CancelOrder": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.OrderActions.onCancelOrder",
+											"visible": true,
+											"enabled": true,
+											"text": "İptal Et"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"SuppliersList": {
+					"type": "Component",
+					"id": "SuppliersList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/Suppliers",
+							"variantManagement": "None",
+							"initialLoad": "Enabled",
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							},
+							"content": {
+								"header": {
+									"actions": {
+										"ViewScorecard": {
+											"press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.SupplierExt.onViewScorecard",
+											"visible": true,
+											"enabled": true,
+											"text": "Performans Karnesi"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"ProductsList": {
+					"type": "Component",
+					"id": "ProductsList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/Products",
+							"variantManagement": "Page",
+							"initialLoad": "Enabled",
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"extends": {
+			"extensions": {
+				"sap.ui.controllerExtensions": {
+					"sap.fe.templates.ListReport.ListReportController#customer.supplychaincopilot.supplychaincopilotui::StockLevelsList": {
+						"controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockListExt"
+					},
+					"sap.fe.templates.ListReport.ListReportController#customer.supplychaincopilot.supplychaincopilotui::StockSummaryList": {
+						"controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.DashboardExt"
+					},
+					"sap.fe.templates.ObjectPage.ObjectPageController#customer.supplychaincopilot.supplychaincopilotui::StockLevelsObjectPage": {
+						"controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.ObjectPageExt"
+					},
+					"sap.fe.templates.ListReport.ListReportController#customer.supplychaincopilot.supplychaincopilotui::SuppliersList": {
+						"controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.SupplierExt"
+					}
+				}
+			}
+		},
+		"flexBundle": false
+	},
+	"sap.fiori": {
+		"registrationIds": [],
+		"archeType": "transactional"
+	},
+	"sap.fe": {
+		"app": {
+			"enableLazyLoading": true
+		}
+	}
+}

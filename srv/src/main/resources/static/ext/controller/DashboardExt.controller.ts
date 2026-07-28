@@ -38,8 +38,6 @@ interface Supplier { ID: number; name: string; leadTimeDays: number; }
 export default class DashboardExt extends ControllerExtension<any> {
 
     private _kpiModel: JSONModel = new JSONModel({ kpis: null });
-    private _renderInterval: ReturnType<typeof setInterval> | null = null;
-    private _lastHtml = "";
 
     static overrides = {
         onInit(this: DashboardExt): void {
@@ -47,22 +45,11 @@ export default class DashboardExt extends ControllerExtension<any> {
             this._loadAndRender();
         },
         onAfterRendering(this: DashboardExt): void {
-            this._startWatcher();
-        },
-        onExit(this: DashboardExt): void {
-            if (this._renderInterval) clearInterval(this._renderInterval);
+            if (!document.getElementById("stDashboardKpiPanel")) {
+                this._loadAndRender();
+            }
         }
     };
-
-    private _startWatcher(): void {
-        if (this._renderInterval) return;
-        this._renderInterval = setInterval(() => {
-            const panel = document.getElementById("stDashboardKpiPanel");
-            if (!panel && this._lastHtml) {
-                this._injectPanel(this._lastHtml);
-            }
-        }, 800);
-    }
 
     // ─── Veri yükleme ────────────────────────────────────────────────────────────
 
@@ -103,16 +90,6 @@ export default class DashboardExt extends ControllerExtension<any> {
         orders: PurchaseOrder[],
         suppliers: Supplier[]
     ): void {
-        const html = [
-            this._buildHeaderAndKPIs(totals, summaryRows),
-            this._buildChartsSection(summaryRows, products, stockLevels, orders, suppliers)
-        ].join("");
-
-        this._lastHtml = html;
-        this._injectPanel(html);
-    }
-
-    private _injectPanel(html: string): void {
         const container = document.querySelector(
             ".sapFDynamicPageContent, .sapUiRespGridMedia, .sapMListPage, .sapMPage"
         );
@@ -122,7 +99,11 @@ export default class DashboardExt extends ControllerExtension<any> {
         const panel = document.createElement("div");
         panel.id = "stDashboardKpiPanel";
         panel.className = "stDashboardKpiPanel";
-        panel.innerHTML = html;
+        panel.innerHTML = [
+            this._buildHeaderAndKPIs(totals, summaryRows),
+            this._buildChartsSection(summaryRows, products, stockLevels, orders, suppliers)
+        ].join("");
+
         container.insertBefore(panel, container.firstChild);
     }
 
@@ -321,7 +302,6 @@ export default class DashboardExt extends ControllerExtension<any> {
     }
 
     public onRefreshDashboard(): void {
-        this._lastHtml = "";
         const panel = document.getElementById("stDashboardKpiPanel");
         if (panel) panel.remove();
         this._loadAndRender();

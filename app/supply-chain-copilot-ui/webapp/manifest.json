@@ -482,6 +482,52 @@
               }
             }
           }
+        },
+        "SuppliersList": {
+          "type": "Component",
+          "id": "SuppliersList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Suppliers",
+              "variantManagement": "None",
+              "initialLoad": "Enabled",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": { "type": "ResponsiveTable" }
+                }
+              },
+              "content": {
+                "header": {
+                  "actions": {
+                    "ViewScorecard": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.SupplierExt.onViewScorecard",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Performans Karnesi"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ProductsList": {
+          "type": "Component",
+          "id": "ProductsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Products",
+              "variantManagement": "Page",
+              "initialLoad": "Enabled",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": { "type": "ResponsiveTable" }
+                }
+              }
+            }
+          }
         }
       }
     },

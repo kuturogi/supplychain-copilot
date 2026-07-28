@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/core/AppComponent","./ext/util/NotificationPopover"],function(t,i){"use strict";const o=i["injectNotificationButton"];const n=t.extend("customer.supplychaincopilot.supplychaincopilotui.Component",{metadata:{manifest:"json"},init:function i(){t.prototype.init.call(this);this._initNotifications()},_initNotifications:function t(){const i=this.getRouter();i.attachRouteMatched(()=>{const t=this.getModel();if(t){o(t)}})}});return n});
+//# sourceMappingURL=Component.js.map

@@ -6,17 +6,24 @@ metadata:
 type: application
 server:
   customMiddleware:
+    - name: ui5-tooling-transpile-middleware
+      beforeMiddleware: serveResources
+      configuration:
+        debug: false
+        transformModulesToUI5:
+          overridesToOverride: true
+        excludePatterns:
+          - /Component-preload.js
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ignoreCertErrors: false
         ui5:
           path:
             - /resources
             - /test-resources
           url: https://sapui5.hana.ondemand.com
         backend:
-          # OData isteklerini Spring Boot backend'ine yönlendirir
           - path: /odata
             url: http://localhost:8080
     - name: fiori-tools-appreload
@@ -25,14 +32,6 @@ server:
         port: 35729
         path: webapp
         delay: 300
-    - name: ui5-tooling-transpile-middleware
-      afterMiddleware: compression
-      configuration:
-        debug: true
-        transformModulesToUI5:
-          overridesToOverride: true
-        excludePatterns:
-          - /Component-preload.js
 builder:
   resources:
     excludes:
@@ -42,6 +41,9 @@ builder:
     - name: ui5-tooling-transpile-task
       afterTask: replaceVersion
       configuration:
-        debug: true
+        debug: false
         transformModulesToUI5:
           overridesToOverride: true
+framework:
+  name: SAPUI5
+  version: "1.120.48"
