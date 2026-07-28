@@ -216,7 +216,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   Dashboard KPI Panel
+   Dashboard KPI Panel (fragment — eski, korunuyor)
    ══════════════════════════════════════════════════════════════ */
 
 .stDashboardKpiPanel {
@@ -228,545 +228,310 @@
     border: 1px solid #e8e8e8;
 }
 
-/* Başlık bandı */
-.stDashboardHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.25rem;
-}
-
-.stDashboardHeaderLeft {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.stDashboardHeaderIcon {
-    font-size: 1.8rem;
-    line-height: 1;
-}
-
-.stDashboardTitle {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #32363a;
-}
-
-.stDashboardSubtitle {
-    font-size: 0.8rem;
-    color: #6a6d70;
-    margin-top: 0.1rem;
-}
-
-/* ── KPI Kart Izgarası ─────────────────────────────────────── */
-
-.stKpiGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 0.85rem;
-    margin-bottom: 1.5rem;
-}
-
-.stKpiCard {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    padding: 1rem 1.1rem;
-    border-radius: 0.6rem;
-    border: 1px solid #e0e0e0;
-    background: #fafafa;
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-}
-
-.stKpiCard:hover {
-    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-    transform: translateY(-2px);
-}
-
-.stKpiCard--good {
-    border-left: 4px solid #107e3e;
-    background: #f4fbf6;
-}
-
-.stKpiCard--warning {
-    border-left: 4px solid #e76500;
-    background: #fef9f4;
-}
-
-.stKpiCard--critical {
-    border-left: 4px solid #bb0000;
-    background: #fff5f5;
-}
-
-.stKpiCard--neutral {
-    border-left: 4px solid #0064d9;
-    background: #f0f6ff;
-}
-
-.stKpiCard__icon {
-    font-size: 1.9rem;
-    line-height: 1;
-    flex-shrink: 0;
-}
-
-.stKpiCard__body {
-    min-width: 0;
-}
-
-.stKpiCard__value {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #32363a;
-    line-height: 1.2;
-    white-space: nowrap;
-}
-
-.stKpiCard__label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: #6a6d70;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-top: 0.2rem;
-}
-
-.stKpiCard__sub {
-    font-size: 0.75rem;
-    color: #9a9a9a;
-    margin-top: 0.15rem;
-}
-
-/* ── Mağaza Spark Satırları ────────────────────────────────── */
-
-.stSparkSection {
-    margin-top: 0.25rem;
-}
-
-.stSparkSection__title {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #6a6d70;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.6rem;
-}
-
-.stSparkRow {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.4rem 0;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.stSparkRow:last-child {
-    border-bottom: none;
-}
-
-.stSparkRow__label {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    min-width: 200px;
-    font-size: 0.82rem;
-}
-
-.stSparkRow__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.stSparkRow--ok .stSparkRow__dot {
-    background-color: #107e3e;
-}
-
-.stSparkRow--critical .stSparkRow__dot {
-    background-color: #bb0000;
-}
-
-.stSparkRow__loc {
-    color: #9a9a9a;
-    font-size: 0.75rem;
-}
-
-.stSparkRow__bar {
-    flex: 1;
-    height: 6px;
-    background: #efefef;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.stSparkRow__fill {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, #0064d9, #64b5f6);
-    transition: width 0.4s ease;
-}
-
-.stSparkRow--critical .stSparkRow__fill {
-    background: linear-gradient(90deg, #bb0000, #ef9a9a);
-}
-
-.stSparkRow__stats {
-    display: flex;
-    gap: 0.75rem;
-    font-size: 0.78rem;
-    color: #6a6d70;
-    min-width: 220px;
-    justify-content: flex-end;
-}
-
-.stSparkRow__crit {
-    color: #bb0000;
-    font-weight: 600;
-}
-
-.stSparkRow__ok {
-    color: #107e3e;
-    font-weight: 600;
-}
+.stDashboardHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+.stDashboardHeaderLeft { display: flex; align-items: center; gap: 0.75rem; }
+.stDashboardTitle { font-size: 1.05rem; font-weight: 700; color: #32363a; }
+.stDashboardSubtitle { font-size: 0.8rem; color: #6a6d70; margin-top: 0.1rem; }
 
 /* ══════════════════════════════════════════════════════════════
-   ObjectPage — Stok Hareketi Trend Grafiği
+   Dashboard Dialog — Modern 2025 UI
    ══════════════════════════════════════════════════════════════ */
 
-.stTrendChartContainer {
-    margin: 1rem 1rem 0.5rem 1rem;
-}
+.stDashboardDialog .sapMDialogScrollCont { overflow: hidden; }
 
-.stTrendChartCard {
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 0.75rem;
-    padding: 1rem 1.25rem 0.75rem 1.25rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-}
-
-.stTrendChartTitle {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #32363a;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-}
-
-.stTrendChartLegend {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: #6a6d70;
-}
-
-.stLegendDot {
-    display: inline-block;
-    width: 24px;
-    height: 3px;
-    border-radius: 2px;
-    vertical-align: middle;
-}
-
-.stLegendDot--line {
-    background: #0064d9;
-}
-
-.stLegendDot--threshold {
-    background: #bb0000;
-    background: repeating-linear-gradient(90deg, #bb0000 0 5px, transparent 5px 8px);
-}
-
-.stTrendSvg {
-    width: 100%;
-    max-width: 560px;
-    height: auto;
-    display: block;
-}
-
-.stChartLabel {
-    font-size: 9px;
-    fill: #9a9a9a;
-    text-anchor: middle;
-}
-
-.stChartLabelY {
-    text-anchor: end;
-}
-
-.stChartThresholdLabel {
-    font-size: 8px;
-    fill: #bb0000;
-    text-anchor: start;
-}
-
-.stChartDot {
-    fill: #0064d9;
-    stroke: #fff;
-    stroke-width: 1.5;
-    cursor: pointer;
-    transition: r 0.1s;
-}
-
-.stChartDot:hover {
-    r: 6;
-}
-
-.stChartDotCrit {
-    fill: #bb0000;
-    stroke: #fff;
-    stroke-width: 1.5;
-    cursor: pointer;
-    transition: r 0.1s;
-}
-
-.stChartDotCrit:hover {
-    r: 6;
-}
-
-.stTrendChartNote {
-    font-size: 0.72rem;
-    color: #b0b0b0;
-    margin-top: 0.4rem;
-    text-align: right;
-}
-
-/* ══════════════════════════════════════════════════════════════
-   Bildirim Paneli — Shell Header Badge + Popover
-   ══════════════════════════════════════════════════════════════ */
-
-/* Çan ikonu kapsayıcısı */
-.stNotifBtnWrapper {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 0.3rem 0.5rem;
-    border-radius: 0.4rem;
-    transition: background 0.15s;
-    user-select: none;
-    margin-left: 0.5rem;
-}
-
-.stNotifBtnWrapper:hover {
-    background: rgba(0,0,0,0.06);
-}
-
-.stNotifBellIcon {
-    font-size: 1.3rem;
-    line-height: 1;
-}
-
-/* Kırmızı sayı rozeti */
-.stNotifBadge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 18px;
-    height: 18px;
-    background: #bb0000;
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 700;
-    border-radius: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 4px;
-    border: 2px solid #fff;
-    line-height: 1;
-    pointer-events: none;
-}
-
-/* Popover genel */
-.stNotifPopover .sapMPopoverCont {
+.stDashboardDialogBody {
+    background: #f7f8fc;
     padding: 0;
 }
 
-/* Bildirim listesi kapsayıcısı */
-.stNotifItemsContainer {
-    padding: 0.25rem 0;
-}
+/* ── Bölüm ─────────────────────────────────────────────────── */
 
-/* Tek bildirim satırı */
-.stNotifRow {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.65rem;
-    padding: 0.65rem 1rem;
-    cursor: pointer;
-    border-bottom: 1px solid #f2f2f2;
-    transition: background 0.12s;
-}
-
-.stNotifRow:last-child {
-    border-bottom: none;
-}
-
-.stNotifRow:hover {
-    background: #f5f7fa;
-}
-
-.stNotifRow--unread {
-    background: #fafcff;
-    border-left: 3px solid #0064d9;
-}
-
-.stNotifRow--read {
+.stDashSection {
     background: #fff;
-    border-left: 3px solid transparent;
-    opacity: 0.75;
+    border-radius: 14px;
+    margin: 16px 16px 0 16px;
+    padding: 18px 20px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    border: 1px solid #eef0f5;
 }
 
-/* Önem ikonu */
-.stNotifSevIcon {
-    margin-top: 0.1rem;
-    flex-shrink: 0;
-    font-size: 1.1rem !important;
-}
+.stDashSection:last-child { margin-bottom: 16px; }
 
-/* Metin bloğu */
-.stNotifTextBox {
-    flex: 1;
-    min-width: 0;
-}
-
-.stNotifMsg {
-    font-size: 0.82rem;
-    color: #32363a;
-    line-height: 1.4;
-    white-space: normal;
-    word-break: break-word;
-}
-
-.stNotifMeta {
-    font-size: 0.73rem;
-    color: #9a9a9a;
-    margin-top: 0.2rem;
-}
-
-/* Boş durum */
-.stNotifEmpty {
+.stDashSectionHeader {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 2.5rem 1rem;
-    gap: 0.5rem;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid #f0f2f7;
 }
 
-.stNotifEmptyIcon {
-    color: #107e3e !important;
-    text-align: center;
+.stDashSectionIcon { font-size: 1.1rem; line-height: 1; }
+
+.stDashSectionTitle {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    letter-spacing: 0.01em;
+    flex: 1;
 }
 
-.stNotifEmptyText {
+/* ── KPI Kartları (yeni) ───────────────────────────────────── */
+
+.stKpiGrid2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 900px) {
+    .stKpiGrid2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+.stKpiCard2 {
+    position: relative;
+    background: #fafbfd;
+    border: 1px solid #eef0f5;
+    border-radius: 12px;
+    padding: 16px 16px 14px 20px;
+    overflow: hidden;
+    transition: box-shadow 0.18s, transform 0.18s;
+}
+
+.stKpiCard2:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.stKpiCard2__accent {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 12px 0 0 12px;
+}
+
+.stKpiCard2__icon {
+    font-size: 1.7rem;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stKpiCard2__value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.stKpiCard2__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+}
+
+.stKpiCard2__sub {
+    font-size: 0.72rem;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+/* ── Mağaza Spark Satırları (yeni) ────────────────────────── */
+
+.stSparkGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stSparkRow2 {
+    display: grid;
+    grid-template-columns: 200px 1fr 160px;
+    align-items: center;
+    gap: 14px;
+    background: #fafbfd;
+    border: 1px solid #eef0f5;
+    border-radius: 10px;
+    padding: 10px 14px;
+    transition: background 0.15s;
+}
+
+.stSparkRow2:hover { background: #f0f4ff; }
+
+.stSparkRow2--crit {
+    background: #fff8f8;
+    border-color: #fde8e8;
+}
+
+.stSparkRow2__info { display: flex; flex-direction: column; gap: 2px; }
+
+.stSparkRow2__name {
     font-size: 0.85rem;
-    color: #6a6d70;
-    text-align: center;
+    font-weight: 700;
+    color: #1a1a2e;
 }
 
-/* Footer butonu */
-.stNotifMarkAllBtn {
+.stSparkRow2__loc {
+    font-size: 0.72rem;
+    color: #9ca3af;
+}
+
+.stSparkRow2__track {
+    height: 8px;
+    background: #eef0f5;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.stSparkRow2__fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    opacity: 0.85;
+}
+
+.stSparkRow2__meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.stSparkRow2__qty {
     font-size: 0.78rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.stSparkRow2__badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+}
+
+.stSparkRow2__badge--warn {
+    background: #fde8e8;
+    color: #c0392b;
+    border: 1px solid #f5c6c6;
+}
+
+.stSparkRow2__badge--ok {
+    background: #e6f9f0;
+    color: #107e3e;
+    border: 1px solid #b3edd0;
 }
 
 /* ══════════════════════════════════════════════════════════════
-   Analitik Grafik Paneli
+   Grafik Kartları — Yeni Modern Tasarım
    ══════════════════════════════════════════════════════════════ */
 
-.stChartSectionTitle {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #32363a;
-    margin: 1.25rem 0 0.75rem 0;
-    padding-bottom: 0.4rem;
-    border-bottom: 2px solid #e8e8e8;
-}
-
-/* 2 sütunlu grid, dar ekranda 1 sütun */
-.stChartsGrid {
+.stChartsGrid2 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
 }
 
-/* Tek grafik kartı */
+@media (max-width: 700px) {
+    .stChartsGrid2 { grid-template-columns: 1fr; }
+}
+
 .stChartCard {
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 0.75rem;
-    padding: 1rem 1.1rem 0.85rem 1.1rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    min-height: 200px;
+    background: #fafbfd;
+    border: 1px solid #eef0f5;
+    border-radius: 12px;
+    padding: 16px 16px 14px;
     display: flex;
     flex-direction: column;
+    gap: 12px;
+    transition: box-shadow 0.18s;
 }
+
+.stChartCard:hover {
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
+
+.stChartCard--empty { opacity: 0.7; }
+
+.stChartHeader {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid #f0f2f7;
+}
+
+.stChartIcon { font-size: 1rem; }
 
 .stChartTitle {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    color: #32363a;
+    color: #374151;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.75rem;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 0.4rem;
+    letter-spacing: 0.05em;
 }
 
-/* Boş durum */
 .stChartEmpty {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.82rem;
-    color: #9a9a9a;
+    color: #9ca3af;
     font-style: italic;
+    min-height: 80px;
 }
 
-/* Legand satırı */
+/* Legend pill */
 .stChartLegendRow {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
-    margin-bottom: 0.5rem;
+    gap: 8px;
     flex-wrap: wrap;
+    margin-top: -4px;
 }
 
-/* ── Pasta Grafiği ─────────────────────────────────────────── */
+.stLegendPill {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 99px;
+    white-space: nowrap;
+}
 
+/* Pasta grafik */
 .stPieWrapper {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 14px;
     flex-wrap: wrap;
 }
 
-.stPieSvg {
-    flex-shrink: 0;
+.stPieSvgWrap { flex-shrink: 0; }
+
+.stPieSlice {
+    transition: opacity 0.15s;
+    cursor: pointer;
 }
+.stPieSlice:hover { opacity: 0.82; }
 
 .stPieLegend {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 6px;
     flex: 1;
     min-width: 0;
 }
 
 .stPieLegendItem {
-    display: flex;
+    display: grid;
+    grid-template-columns: 10px 1fr auto auto;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.78rem;
-    color: #32363a;
+    gap: 6px;
+    font-size: 0.75rem;
 }
 
 .stPieLegendDot {
@@ -777,51 +542,32 @@
 }
 
 .stPieLegendLabel {
-    flex: 1;
+    color: #374151;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.stPieLegendValue {
-    font-weight: 600;
-    color: #0064d9;
+.stPieLegendPct {
+    font-weight: 700;
+    color: #6b7280;
     white-space: nowrap;
+    font-size: 0.72rem;
 }
 
-/* ── Dashboard Dialog ──────────────────────────────────────── */
-
-.stDashboardDialog .sapMDialogScrollCont {
-    overflow: hidden;
+.stPieLegendVal {
+    font-weight: 700;
+    color: #1a1a2e;
+    white-space: nowrap;
+    font-size: 0.72rem;
 }
 
-.stDashboardDialogBody {
-    padding: 1rem 1.25rem;
+/* Bar animasyon */
+.stBarAnim {
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
 }
 
-.stNttBadgeInline {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-}
-
-/* ── NTT DATA Marka Rozeti (Dashboard Header) ──────────────── */
-
-.stNttBadge {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-}
-
-.stNttLogo {
-    width: 130px;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.18));
-}
-
-/* ── Bar & Funnel SVG ──────────────────────────────────────── */
-
+/* Bar & Funnel SVG */
 .stBarSvg,
 .stFunnelSvg {
     width: 100%;
@@ -829,3 +575,34 @@
     display: block;
     overflow: visible;
 }
+
+.stFunnelWrap { display: flex; justify-content: center; }
+
+/* ══════════════════════════════════════════════════════════════
+   ObjectPage — Stok Hareketi Trend Grafiği
+   ══════════════════════════════════════════════════════════════ */
+
+.stTrendChartContainer { margin: 1rem 1rem 0.5rem 1rem; }
+
+.stTrendChartCard {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem 0.75rem 1.25rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.stTrendChartTitle { font-size: 0.9rem; font-weight: 700; color: #32363a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+.stTrendChartLegend { margin-left: auto; display: flex; align-items: center; gap: 0.6rem; font-size: 0.75rem; font-weight: 400; color: #6a6d70; }
+.stLegendDot { display: inline-block; width: 24px; height: 3px; border-radius: 2px; vertical-align: middle; }
+.stLegendDot--line { background: #4f8ef7; }
+.stLegendDot--threshold { background: repeating-linear-gradient(90deg, #e05a5a 0 5px, transparent 5px 8px); }
+.stTrendSvg { width: 100%; max-width: 560px; height: auto; display: block; }
+.stChartLabel { font-size: 9px; fill: #9a9a9a; text-anchor: middle; }
+.stChartLabelY { text-anchor: end; }
+.stChartThresholdLabel { font-size: 8px; fill: #e05a5a; text-anchor: start; }
+.stChartDot { fill: #4f8ef7; stroke: #fff; stroke-width: 1.5; cursor: pointer; transition: r 0.1s; }
+.stChartDot:hover { r: 6; }
+.stChartDotCrit { fill: #e05a5a; stroke: #fff; stroke-width: 1.5; cursor: pointer; transition: r 0.1s; }
+.stChartDotCrit:hover { r: 6; }
+.stTrendChartNote { font-size: 0.72rem; color: #b0b0b0; margin-top: 0.4rem; text-align: right; }

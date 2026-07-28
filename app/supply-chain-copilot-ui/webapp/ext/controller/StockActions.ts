@@ -428,57 +428,73 @@ function _buildKpiHtml(rows: StoreSummaryRow[]): string {
     const healthPct     = rows.length > 0 ? Math.round((healthy / rows.length) * 100) : 100;
 
     const cards = [
-        { icon: "💰", label: "Toplam Stok Değeri",  value: _fmtCurrency(totalValue),                  sub: `${rows.length} mağaza`,                                                    cls: "neutral"  },
-        { icon: "📦", label: "Toplam Stok Adedi",   value: totalQty.toLocaleString("tr-TR"),           sub: "Tüm mağazalar",                                                            cls: "neutral"  },
-        { icon: criticalCount > 0 ? "⚠️" : "✅",    label: "Kritik Ürün",                             value: String(criticalCount), sub: criticalCount > 0 ? "Acil aksiyon" : "Tümü sağlıklı", cls: criticalCount > 0 ? "critical" : "good" },
-        { icon: "🏪", label: "Sağlıklı Mağaza",     value: `${healthy} / ${rows.length}`,             sub: `%${healthPct} kritik ürünsüz`,                                             cls: healthPct === 100 ? "good" : healthPct >= 50 ? "warning" : "critical" }
+        { icon: "💰", label: "Toplam Stok Değeri",  value: _fmtCurrency(totalValue),            sub: `${rows.length} mağaza geneli`,                                                      accent: "#4f8ef7", cls: "blue"     },
+        { icon: "📦", label: "Toplam Stok Adedi",   value: totalQty.toLocaleString("tr-TR"),     sub: "Tüm ürünler",                                                                       accent: "#34c38f", cls: "green"    },
+        { icon: criticalCount > 0 ? "⚠️" : "✅",    label: "Kritik Stok",  value: String(criticalCount), sub: criticalCount > 0 ? "Acil aksiyon gerekiyor" : "Tüm stoklar sağlıklı",  accent: criticalCount > 0 ? "#e05a5a" : "#34c38f", cls: criticalCount > 0 ? "red" : "green" },
+        { icon: "🏪", label: "Sağlıklı Mağaza",     value: `${healthy} / ${rows.length}`,       sub: `%${healthPct} mağaza kritik ürünsüz`,                                               accent: healthPct === 100 ? "#34c38f" : healthPct >= 50 ? "#f4a534" : "#e05a5a", cls: healthPct === 100 ? "green" : healthPct >= 50 ? "orange" : "red" }
     ];
 
     const cardsHtml = cards.map(c => `
-        <div class="stKpiCard stKpiCard--${c.cls}">
-            <div class="stKpiCard__icon">${c.icon}</div>
-            <div class="stKpiCard__body">
-                <div class="stKpiCard__value">${c.value}</div>
-                <div class="stKpiCard__label">${c.label}</div>
-                <div class="stKpiCard__sub">${c.sub}</div>
+        <div class="stKpiCard2">
+            <div class="stKpiCard2__accent" style="background:${c.accent}"></div>
+            <div class="stKpiCard2__icon">${c.icon}</div>
+            <div class="stKpiCard2__body">
+                <div class="stKpiCard2__value" style="color:${c.accent}">${c.value}</div>
+                <div class="stKpiCard2__label">${c.label}</div>
+                <div class="stKpiCard2__sub">${c.sub}</div>
             </div>
         </div>`).join("");
 
     const sparkHtml = rows.map(r => {
         const pct = totalValue > 0 ? Math.round((r.totalValue / totalValue) * 100) : 0;
-        const cls = r.criticalCount > 0 ? "stSparkRow--critical" : "stSparkRow--ok";
-        return `<div class="stSparkRow ${cls}">
-            <div class="stSparkRow__label">
-                <span class="stSparkRow__dot"></span>
-                <strong>${r.storeName}</strong>
-                <span class="stSparkRow__loc">${r.location}</span>
+        const isCrit = r.criticalCount > 0;
+        return `<div class="stSparkRow2 ${isCrit ? "stSparkRow2--crit" : ""}">
+            <div class="stSparkRow2__info">
+                <span class="stSparkRow2__name">${r.storeName}</span>
+                <span class="stSparkRow2__loc">📍 ${r.location}</span>
             </div>
-            <div class="stSparkRow__bar"><div class="stSparkRow__fill" style="width:${pct}%"></div></div>
-            <div class="stSparkRow__stats">
-                <span>${r.totalQuantity.toLocaleString("tr-TR")} adet</span>
-                ${r.criticalCount > 0 ? `<span class="stSparkRow__crit">⚠ ${r.criticalCount} kritik</span>` : `<span class="stSparkRow__ok">✓</span>`}
-                <span>${r.totalValue.toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺</span>
+            <div class="stSparkRow2__track">
+                <div class="stSparkRow2__fill" style="width:${pct}%;background:${isCrit ? "#e05a5a" : "#4f8ef7"}"></div>
+            </div>
+            <div class="stSparkRow2__meta">
+                <span class="stSparkRow2__qty">${r.totalQuantity.toLocaleString("tr-TR")} adet</span>
+                ${isCrit
+                    ? `<span class="stSparkRow2__badge stSparkRow2__badge--warn">⚠ ${r.criticalCount} kritik</span>`
+                    : `<span class="stSparkRow2__badge stSparkRow2__badge--ok">✓ Sağlıklı</span>`
+                }
             </div>
         </div>`;
     }).join("");
 
     return `
         <div class="stDashboardDialogBody">
-            <div class="stNttBadgeInline">
-                <svg viewBox="0 0 140 36" xmlns="http://www.w3.org/2000/svg" width="140" height="36">
-                    <rect width="140" height="36" rx="6" fill="#003087"/>
-                    <text x="8" y="14" font-family="Arial,sans-serif" font-size="11" font-weight="900" fill="#fff" letter-spacing="1">NTT DATA</text>
-                    <text x="8" y="28" font-family="Arial,sans-serif" font-size="7.5" fill="#7eb3f5" letter-spacing="0.3">Business Solutions</text>
-                    <circle cx="128" cy="18" r="7" fill="#e4002b"/>
-                    <circle cx="128" cy="18" r="4" fill="#fff"/>
-                    <circle cx="128" cy="18" r="2" fill="#e4002b"/>
-                </svg>
+
+            <div class="stDashSection">
+                <div class="stDashSectionHeader">
+                    <span class="stDashSectionIcon">📊</span>
+                    <span class="stDashSectionTitle">Genel Bakış</span>
+                    <div class="stNttBadgeInline">
+                        <svg viewBox="0 0 140 34" xmlns="http://www.w3.org/2000/svg" width="120" height="30">
+                            <rect width="140" height="34" rx="6" fill="#003087"/>
+                            <text x="8" y="13" font-family="Arial,sans-serif" font-size="10.5" font-weight="900" fill="#fff" letter-spacing="1">NTT DATA</text>
+                            <text x="8" y="26" font-family="Arial,sans-serif" font-size="7" fill="#7eb3f5" letter-spacing="0.3">Business Solutions</text>
+                            <circle cx="128" cy="17" r="7" fill="#e4002b"/>
+                            <circle cx="128" cy="17" r="4" fill="#fff"/>
+                            <circle cx="128" cy="17" r="2" fill="#e4002b"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stKpiGrid2">${cardsHtml}</div>
             </div>
-            <div class="stKpiGrid">${cardsHtml}</div>
-            <div class="stSparkSection">
-                <div class="stSparkSection__title">Mağaza Bazlı Stok Dağılımı</div>
-                ${sparkHtml}
+
+            <div class="stDashSection">
+                <div class="stDashSectionHeader">
+                    <span class="stDashSectionIcon">🏪</span>
+                    <span class="stDashSectionTitle">Mağaza Bazlı Stok Dağılımı</span>
+                </div>
+                <div class="stSparkGrid">${sparkHtml}</div>
             </div>
+
         </div>`;
 }
 
@@ -516,13 +532,25 @@ function _buildChartsHtml(
         }
         return { label: s.name.split(" ")[0], value: s.leadTimeDays, value2: avgActual > 0 ? avgActual : undefined, color: "#0064d9", color2: avgActual > s.leadTimeDays ? "#bb0000" : "#107e3e", tooltip: `${s.name} — Söz: ${s.leadTimeDays} gün`, tooltip2: `${s.name} — Gerçekleşen: ${avgActual} gün` };
     });
-    const supplierBar = buildHorizontalBarChart(supplierItems, "Tedarikçi Teslimat Performansı (gün)", "Söz Verilen", "Gerçekleşen");
+    const supplierBar = buildHorizontalBarChart(supplierItems, "Tedarikçi Teslimat Performansı (gün)", "Söz Verilen", "Gerçekleşen", "🚚");
 
     // Mağaza bar
-    const storeItems = rows.map(r => ({ label: r.storeName.split(" ")[0], value: r.totalQuantity, value2: r.criticalCount, color: "#0064d9", color2: "#bb0000", tooltip: `${r.storeName} — Toplam: ${r.totalQuantity}`, tooltip2: `${r.storeName} — Kritik: ${r.criticalCount}` }));
-    const storeBar = buildHorizontalBarChart(storeItems, "Mağaza Stok Karşılaştırması", "Toplam Stok", "Kritik Ürün");
+    const storeItems = rows.map(r => ({ label: r.storeName.split(" ")[0], value: r.totalQuantity, value2: r.criticalCount, color: "#4f8ef7", color2: "#e05a5a", tooltip: `${r.storeName} — Toplam: ${r.totalQuantity}`, tooltip2: `${r.storeName} — Kritik: ${r.criticalCount}` }));
+    const storeBar = buildHorizontalBarChart(storeItems, "Mağaza Stok Karşılaştırması", "Toplam Stok", "Kritik Ürün", "🏪");
 
-    return `<div class="stChartsGrid">${pie}${funnel}${supplierBar}${storeBar}</div>`;
+    return `
+        <div class="stDashSection">
+            <div class="stDashSectionHeader">
+                <span class="stDashSectionIcon">📈</span>
+                <span class="stDashSectionTitle">Analitik Grafikler</span>
+            </div>
+            <div class="stChartsGrid2">
+                ${pie}
+                ${funnel}
+                ${supplierBar}
+                ${storeBar}
+            </div>
+        </div>`;
 }
 
 let _dashboardDialog: Dialog | null = null;
@@ -578,7 +606,7 @@ export async function _openDashboardDialog(model: ODataModel): Promise<void> {
 
         loadingHtml.setContent("<div></div>");
         kpiContainer.setContent(_buildKpiHtml(rows));
-        chartContainer.setContent(`<div class="stChartSectionTitle">📈 Analitik Grafikler</div>` + _buildChartsHtml(rows, products, stockLevels, orders, suppliers));
+        chartContainer.setContent(_buildChartsHtml(rows, products, stockLevels, orders, suppliers));
     } catch (e) {
         loadingHtml.setContent(`<div style="padding:1rem;color:#bb0000">Veri yüklenemedi: ${e}</div>`);
         console.error("Dashboard veri hatası:", e);
