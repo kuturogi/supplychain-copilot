@@ -1,6 +1,7 @@
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
 import MessageBox from "sap/m/MessageBox";
 import { openAIResultDialog, runWithBusy } from "../util/AIResponseDialog";
+import { exportOrders } from "../util/ExportHelper";
 
 /**
  * Sipariş sayfası aksiyon handler'ları.
@@ -63,4 +64,9 @@ export async function onCancelOrder(this: any, oContext: unknown): Promise<void>
                 "Sipariş iptal ediliyor...", "Sipariş İptal Edildi");
         }
     });
+}
+
+export async function onExportOrders(this: any): Promise<void> {
+    const model = this.getModel() as ODataModel;
+    await exportOrders(model);
 }

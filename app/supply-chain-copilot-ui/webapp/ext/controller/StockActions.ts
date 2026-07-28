@@ -15,6 +15,7 @@ import HBox from "sap/m/HBox";
 import Text from "sap/m/Text";
 
 import { openAIResultDialog, runWithBusy, formatAIText } from "../util/AIResponseDialog";
+import { exportCriticalStocks, exportAllStocks } from "../util/ExportHelper";
 
 /**
  * Fiori Elements custom action handler modülü.
@@ -140,6 +141,42 @@ export function onOpenStores(this: any): void {
     } catch {
         const base = window.location.hash.split("&/")[0];
         window.location.hash = base + "&/Stores";
+    }
+}
+
+export async function onExportCritical(this: any): Promise<void> {
+    const model = this.getModel() as ODataModel;
+    await exportCriticalStocks(model);
+}
+
+export async function onExportAll(this: any): Promise<void> {
+    const model = this.getModel() as ODataModel;
+    await exportAllStocks(model);
+}
+
+export function onOpenNotifications(this: any): void {
+    try {
+        this.routing.navigateToRoute("NotificationsList");
+    } catch {
+        const base = window.location.hash.split("&/")[0];
+        window.location.hash = base + "&/Notifications";
+    }
+}
+
+export async function onMarkAllNotificationsRead(this: any): Promise<void> {
+    const model = this.getModel() as ODataModel;
+    const result = await runWithBusy("Bildirimler güncelleniyor...", async () => {
+        const binding = model.bindContext("/markAllNotificationsRead(...)");
+        await binding.execute();
+        return (binding.getBoundContext()?.getObject() as { value?: string })?.value;
+    });
+    if (result !== undefined) {
+        model.refresh();
+        openAIResultDialog({
+            title: "Bildirimler Güncellendi",
+            text: "Tüm bildirimler okundu olarak işaretlendi.",
+            state: "Success"
+        });
     }
 }
 

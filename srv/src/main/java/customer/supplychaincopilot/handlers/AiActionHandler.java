@@ -11,6 +11,8 @@ import customer.supplychaincopilot.service.AiCoreClient;
 import customer.supplychaincopilot.service.DemoReportBuilder;
 import customer.supplychaincopilot.service.PromptBuilder;
 import customer.supplychaincopilot.service.StockDataRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +27,8 @@ import java.util.*;
 @ServiceName("SupplyChainService")
 public class AiActionHandler implements EventHandler {
 
+    private static final Logger log = LoggerFactory.getLogger(AiActionHandler.class);
+
     @Autowired private PersistenceService     db;
     @Autowired private StockDataRepository    repo;
     @Autowired private AiCoreClient           aiCore;
@@ -35,7 +39,7 @@ public class AiActionHandler implements EventHandler {
 
     @On(event = "analyzeStockWithAI")
     public String analyzeStockWithAI() {
-        System.out.println("analyzeStockWithAI çağrıldı");
+        log.info("analyzeStockWithAI çağrıldı");
         StockDataRepository.StockData data = repo.loadStockData();
         String result;
 
@@ -43,7 +47,7 @@ public class AiActionHandler implements EventHandler {
             try {
                 result = aiCore.chat(promptBuilder.buildAnalysisPrompt(data));
             } catch (Exception e) {
-                System.err.println("AI Core hatası: " + e.getMessage());
+                log.error("AI Core hatası: {}", e.getMessage());
                 return "SAP AI Core bağlantısında hata: " + e.getMessage();
             }
         } else {

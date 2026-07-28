@@ -7,6 +7,8 @@ import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.persistence.PersistenceService;
 import customer.supplychaincopilot.service.StockDataRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +23,15 @@ import java.util.*;
 @ServiceName("SupplyChainService")
 public class BulkOrderHandler implements EventHandler {
 
+    private static final Logger log = LoggerFactory.getLogger(BulkOrderHandler.class);
+
     @Autowired private PersistenceService  db;
     @Autowired private StockDataRepository repo;
 
     @On(event = "createBulkOrders")
     @SuppressWarnings({"unchecked", "rawtypes"})
     public String createBulkOrders() {
-        System.out.println("createBulkOrders çağrıldı");
+        log.info("createBulkOrders çağrıldı");
 
         StockDataRepository.StockData data = repo.loadStockData();
         List<String> created  = new ArrayList<>();

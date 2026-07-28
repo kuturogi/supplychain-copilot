@@ -151,6 +151,11 @@
           "pattern": "Stores({key}):?query:",
           "name": "StoresObjectPage",
           "target": "StoresObjectPage"
+        },
+        {
+          "pattern": "Notifications:?query:",
+          "name": "NotificationsList",
+          "target": "NotificationsList"
         }
       ],
       "targets": {
@@ -239,6 +244,24 @@
                       "visible": true,
                       "enabled": true,
                       "text": "Mağazalar"
+                    },
+                    "ExportCritical": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onExportCritical",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Kritik Export"
+                    },
+                    "ExportAll": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onExportAll",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Tüm Stok Export"
+                    },
+                    "OpenNotifications": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenNotifications",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Bildirimler"
                     }
                   }
                 }
@@ -329,6 +352,40 @@
             }
           }
         },
+        "PurchaseOrdersList": {
+          "type": "Component",
+          "id": "PurchaseOrdersList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/PurchaseOrders",
+              "variantManagement": "Page",
+              "initialLoad": "Enabled",
+              "navigation": {
+                "PurchaseOrders": {
+                  "detail": { "route": "PurchaseOrdersObjectPage" }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": { "type": "ResponsiveTable" }
+                }
+              },
+              "content": {
+                "header": {
+                  "actions": {
+                    "ExportOrders": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.OrderActions.onExportOrders",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Export (CSV)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "StoresList": {
           "type": "Component",
           "id": "StoresList",
@@ -359,6 +416,35 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/Stores"
+            }
+          }
+        },
+        "NotificationsList": {
+          "type": "Component",
+          "id": "NotificationsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Notifications",
+              "variantManagement": "None",
+              "initialLoad": "Enabled",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": { "type": "ResponsiveTable" }
+                }
+              },
+              "content": {
+                "header": {
+                  "actions": {
+                    "MarkAllRead": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onMarkAllNotificationsRead",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Tümünü Okundu İşaretle"
+                    }
+                  }
+                }
+              }
             }
           }
         },

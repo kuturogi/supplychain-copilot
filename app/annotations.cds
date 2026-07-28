@@ -1,5 +1,42 @@
 using { SupplyChainService } from '../srv/service';
 
+// ─── Notifications — Liste ────────────────────────────────────────────────────
+
+annotate SupplyChainService.Notifications with @(
+    UI: {
+        HeaderInfo: {
+            TypeName: 'Bildirim',
+            TypeNamePlural: 'Bildirimler'
+        },
+        LineItem: [
+            {
+                $Type: 'UI.DataField',
+                Value: createdAt,
+                Label: 'Tarih'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: severity,
+                Label: 'Önem'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: message,
+                Label: 'Mesaj'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: isRead,
+                Label: 'Okundu'
+            }
+        ],
+        PresentationVariant: {
+            SortOrder: [{ Property: createdAt, Descending: true }],
+            Visualizations: ['@UI.LineItem']
+        }
+    }
+);
+
 // ─── StockLevels — Liste ve ObjectPage ──────────────────────────────────────
 
 annotate SupplyChainService.StockLevels with @(

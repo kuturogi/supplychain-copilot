@@ -8,6 +8,8 @@ import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.persistence.PersistenceService;
 import customer.supplychaincopilot.service.StockDataRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,8 @@ import java.util.Map;
 @Component
 @ServiceName("SupplyChainService")
 public class NotificationHandler implements EventHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(NotificationHandler.class);
 
     @Autowired private PersistenceService  db;
     @Autowired private StockDataRepository repo;
@@ -41,7 +45,7 @@ public class NotificationHandler implements EventHandler {
             .byId(notificationId.toString())
             .data(Map.of("isRead", true)));
 
-        System.out.println("Bildirim okundu işaretlendi: " + notificationId);
+        log.info("Bildirim okundu işaretlendi: {}", notificationId);
         return "OK";
     }
 
@@ -59,7 +63,7 @@ public class NotificationHandler implements EventHandler {
                 .data(Map.of("isRead", true))
         ));
 
-        System.out.printf("Tüm bildirimler okundu işaretlendi (%d adet)%n", unread.size());
+        log.info("Tüm bildirimler okundu işaretlendi ({} adet)", unread.size());
         return "OK";
     }
 

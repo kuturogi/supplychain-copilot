@@ -9,6 +9,8 @@ import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.persistence.PersistenceService;
 import customer.supplychaincopilot.service.StockDataRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +26,8 @@ import java.util.UUID;
 @Component
 @ServiceName("SupplyChainService")
 public class OrderWorkflowHandler implements EventHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(OrderWorkflowHandler.class);
 
     @Autowired private PersistenceService  db;
     @Autowired private StockDataRepository repo;
@@ -57,7 +61,7 @@ public class OrderWorkflowHandler implements EventHandler {
             "Bilgi"
         );
 
-        System.out.printf("Sipariş onaylandı: %s%n", orderId);
+        log.info("Sipariş onaylandı: {}", orderId);
         return String.format("SİPARİŞ ONAYLANDI\n\nÜrün: %s\nMağaza: %s\nMiktar: %d adet\nDurum: Onaylandı",
             productName, storeName, repo.toInt(order.get("orderQuantity")));
     }
@@ -100,7 +104,7 @@ public class OrderWorkflowHandler implements EventHandler {
             "Bilgi"
         );
 
-        System.out.printf("Sipariş teslim edildi: %s%n", orderId);
+        log.info("Sipariş teslim edildi: {}", orderId);
         return String.format("TESLİMAT TAMAMLANDI\n\nÜrün: %s\nMağaza: %s\nMiktar: %d adet stoka eklendi\nTeslim: %s",
             productName, storeName, repo.toInt(order.get("orderQuantity")),
             java.time.LocalDate.now().toString());
@@ -133,7 +137,7 @@ public class OrderWorkflowHandler implements EventHandler {
             "Uyarı"
         );
 
-        System.out.printf("Sipariş iptal edildi: %s%n", orderId);
+        log.info("Sipariş iptal edildi: {}", orderId);
         return String.format("SİPARİŞ İPTAL EDİLDİ\n\nÜrün: %s\nDurum: İptal", productName);
     }
 

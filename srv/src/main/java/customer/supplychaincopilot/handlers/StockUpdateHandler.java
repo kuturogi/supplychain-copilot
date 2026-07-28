@@ -10,6 +10,8 @@ import com.sap.cds.services.handler.annotations.Before;
 import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.persistence.PersistenceService;
 import customer.supplychaincopilot.service.StockDataRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +27,8 @@ import java.util.UUID;
 @Component
 @ServiceName("SupplyChainService")
 public class StockUpdateHandler implements EventHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(StockUpdateHandler.class);
 
     @Autowired
     private PersistenceService db;
@@ -88,7 +92,7 @@ public class StockUpdateHandler implements EventHandler {
         movement.put("changedAt", java.time.Instant.now());
         movement.put("reason", isReplenishment ? "İkmal - stok güncellemesi" : "Satış / stok düşüşü");
         db.run(Insert.into("my.supplychain.StockMovement").entry(movement));
-        System.out.printf("Stok hareketi kaydedildi (ID=%s, değişim=%+d)%n", stockLevelId, changeAmount);
+        log.info("Stok hareketi kaydedildi (ID={}, değişim={})", stockLevelId, changeAmount);
     }
 
     private void insertNotification(String message, String severity) {
@@ -99,6 +103,6 @@ public class StockUpdateHandler implements EventHandler {
         notification.put("createdAt", java.time.Instant.now());
         notification.put("isRead", false);
         db.run(Insert.into("my.supplychain.Notification").entry(notification));
-        System.out.println("Bildirim oluşturuldu: " + message);
+        log.info("Bildirim oluşturuldu [{}]: {}", severity, message);
     }
 }
