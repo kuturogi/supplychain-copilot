@@ -19,6 +19,8 @@
     "typescript": "^5.9.3"
   },
   "scripts": {
+    "start": "fiori run --open 'index.html'",
+    "start-local": "ui5 serve --open index.html",
     "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf"
   }
 }

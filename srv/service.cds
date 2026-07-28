@@ -34,4 +34,8 @@ service SupplyChainService {
     action askCopilot(question: String) returns String;
     // Söz verilen vs gerçekleşen teslimat sürelerini karşılaştıran tedarikçi karnesi
     action supplierScorecard() returns String;
+    // Bildirim yönetimi
+    action markNotificationRead(notificationId: UUID) returns String;
+    action markAllNotificationsRead() returns String;
+    function getUnreadNotificationCount() returns Integer;
 }

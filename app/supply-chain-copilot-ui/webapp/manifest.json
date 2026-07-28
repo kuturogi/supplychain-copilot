@@ -63,7 +63,8 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -92,7 +93,11 @@
       }
     },
     "resources": {
-      "css": []
+      "css": [
+        {
+          "uri": "css/custom.css"
+        }
+      ]
     },
     "routing": {
       "config": {},
@@ -185,6 +190,24 @@
                     "type": "ResponsiveTable"
                   }
                 }
+              },
+              "content": {
+                "header": {
+                  "actions": {
+                    "AnalyzeDashboard": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.DashboardExt.onAnalyzeDashboard",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "AI Analiz"
+                    },
+                    "RefreshDashboard": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.DashboardExt.onRefreshDashboard",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Yenile"
+                    }
+                  }
+                }
               }
             }
           }
@@ -225,6 +248,9 @@
         "sap.ui.controllerExtensions": {
           "sap.fe.templates.ListReport.ListReportController#customer.supplychaincopilot.supplychaincopilotui::StockLevelsList": {
             "controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockListExt"
+          },
+          "sap.fe.templates.ListReport.ListReportController#customer.supplychaincopilot.supplychaincopilotui::StockSummaryList": {
+            "controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.DashboardExt"
           },
           "sap.fe.templates.ObjectPage.ObjectPageController#customer.supplychaincopilot.supplychaincopilotui::StockLevelsObjectPage": {
             "controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.ObjectPageExt"
