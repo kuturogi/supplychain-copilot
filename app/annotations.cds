@@ -213,3 +213,181 @@ annotate SupplyChainService.StockMovements with @(
         ]
     }
 );
+
+// ─── PurchaseOrders — Gelişmiş Liste + ObjectPage ────────────────────────────
+
+annotate SupplyChainService.PurchaseOrders with @(
+    UI: {
+        HeaderInfo: {
+            TypeName: 'Sipariş',
+            TypeNamePlural: 'Satın Alma Siparişleri'
+        },
+        LineItem: [
+            {
+                $Type: 'UI.DataField',
+                Value: createdAt,
+                Label: 'Sipariş Tarihi'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: product_ID,
+                Label: 'Ürün'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: store_ID,
+                Label: 'Mağaza'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: supplier_ID,
+                Label: 'Tedarikçi'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: orderQuantity,
+                Label: 'Miktar'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: status,
+                Label: 'Durum',
+                Criticality: { $edmJson: { $If: [
+                    { $Eq: [{ $Path: 'status' }, 'Teslim Edildi'] }, 3,
+                    { $If: [
+                        { $Eq: [{ $Path: 'status' }, 'Onaylandı'] }, 2, 1
+                    ]}
+                ]}},
+                CriticalityRepresentation: #WithIcon
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: deliveredAt,
+                Label: 'Teslim Tarihi'
+            }
+        ],
+        Facets: [
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: 'Sipariş Detayı',
+                Target: '@UI.FieldGroup#OrderDetail'
+            }
+        ],
+        FieldGroup #OrderDetail: {
+            Data: [
+                { $Type: 'UI.DataField', Value: product_ID,     Label: 'Ürün'           },
+                { $Type: 'UI.DataField', Value: store_ID,       Label: 'Mağaza'         },
+                { $Type: 'UI.DataField', Value: supplier_ID,    Label: 'Tedarikçi'      },
+                { $Type: 'UI.DataField', Value: orderQuantity,  Label: 'Miktar'         },
+                { $Type: 'UI.DataField', Value: status,         Label: 'Durum'          },
+                { $Type: 'UI.DataField', Value: createdAt,      Label: 'Sipariş Tarihi' },
+                { $Type: 'UI.DataField', Value: deliveredAt,    Label: 'Teslim Tarihi'  },
+                { $Type: 'UI.DataField', Value: note,           Label: 'Not'            }
+            ]
+        },
+        PresentationVariant: {
+            SortOrder: [{ Property: createdAt, Descending: true }],
+            Visualizations: ['@UI.LineItem']
+        }
+    }
+);
+
+// ─── Suppliers — Liste ────────────────────────────────────────────────────────
+
+annotate SupplyChainService.Suppliers with @(
+    UI: {
+        HeaderInfo: {
+            TypeName: 'Tedarikçi',
+            TypeNamePlural: 'Tedarikçiler'
+        },
+        LineItem: [
+            {
+                $Type: 'UI.DataField',
+                Value: name,
+                Label: 'Tedarikçi Adı'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: category,
+                Label: 'Kategori'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: contactEmail,
+                Label: 'E-posta'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: leadTimeDays,
+                Label: 'Söz Verilen Teslimat (gün)'
+            }
+        ],
+        Facets: [
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: 'Tedarikçi Bilgileri',
+                Target: '@UI.FieldGroup#SupplierDetail'
+            }
+        ],
+        FieldGroup #SupplierDetail: {
+            Data: [
+                { $Type: 'UI.DataField', Value: name,         Label: 'Ad'              },
+                { $Type: 'UI.DataField', Value: category,     Label: 'Kategori'        },
+                { $Type: 'UI.DataField', Value: contactEmail, Label: 'E-posta'         },
+                { $Type: 'UI.DataField', Value: leadTimeDays, Label: 'Teslimat (gün)'  }
+            ]
+        }
+    }
+);
+
+// ─── Products — Liste ─────────────────────────────────────────────────────────
+
+annotate SupplyChainService.Products with @(
+    UI: {
+        HeaderInfo: {
+            TypeName: 'Ürün',
+            TypeNamePlural: 'Ürünler'
+        },
+        LineItem: [
+            {
+                $Type: 'UI.DataField',
+                Value: name,
+                Label: 'Ürün Adı'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: category,
+                Label: 'Kategori'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: unitPrice,
+                Label: 'Birim Fiyat (₺)'
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: supplier_ID,
+                Label: 'Tedarikçi'
+            }
+        ],
+        Facets: [
+            {
+                $Type: 'UI.ReferenceFacet',
+                Label: 'Ürün Bilgileri',
+                Target: '@UI.FieldGroup#ProductDetail'
+            }
+        ],
+        FieldGroup #ProductDetail: {
+            Data: [
+                { $Type: 'UI.DataField', Value: name,        Label: 'Ad'               },
+                { $Type: 'UI.DataField', Value: category,    Label: 'Kategori'         },
+                { $Type: 'UI.DataField', Value: unitPrice,   Label: 'Birim Fiyat (₺)' },
+                { $Type: 'UI.DataField', Value: supplier_ID, Label: 'Tedarikçi'        }
+            ]
+        },
+        PresentationVariant: {
+            SortOrder: [{ Property: category, Descending: false }],
+            Visualizations: ['@UI.LineItem']
+        }
+    }
+);

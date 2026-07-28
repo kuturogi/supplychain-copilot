@@ -85,6 +85,33 @@ export function onOpenDashboard(this: any): void {
     }
 }
 
+export function onOpenOrders(this: any): void {
+    try {
+        this.routing.navigateToRoute("PurchaseOrdersList");
+    } catch {
+        const base = window.location.hash.split("&/")[0];
+        window.location.hash = base + "&/PurchaseOrders";
+    }
+}
+
+export function onOpenSuppliers(this: any): void {
+    try {
+        this.routing.navigateToRoute("SuppliersList");
+    } catch {
+        const base = window.location.hash.split("&/")[0];
+        window.location.hash = base + "&/Suppliers";
+    }
+}
+
+export function onOpenProducts(this: any): void {
+    try {
+        this.routing.navigateToRoute("ProductsList");
+    } catch {
+        const base = window.location.hash.split("&/")[0];
+        window.location.hash = base + "&/Products";
+    }
+}
+
 // ─── Copilot Chat Dialog ─────────────────────────────────────────────────────
 
 interface ChatMessage {

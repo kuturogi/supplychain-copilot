@@ -38,4 +38,8 @@ service SupplyChainService {
     action markNotificationRead(notificationId: UUID) returns String;
     action markAllNotificationsRead() returns String;
     function getUnreadNotificationCount() returns Integer;
+    // Sipariş onay akışı
+    action approvePurchaseOrder(orderId: UUID) returns String;
+    action markOrderDelivered(orderId: UUID) returns String;
+    action cancelPurchaseOrder(orderId: UUID) returns String;
 }

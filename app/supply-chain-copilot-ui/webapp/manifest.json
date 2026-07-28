@@ -116,6 +116,26 @@
           "pattern": "StockSummaryByStore:?query:",
           "name": "StockSummaryList",
           "target": "StockSummaryList"
+        },
+        {
+          "pattern": "PurchaseOrders:?query:",
+          "name": "PurchaseOrdersList",
+          "target": "PurchaseOrdersList"
+        },
+        {
+          "pattern": "PurchaseOrders({key}):?query:",
+          "name": "PurchaseOrdersObjectPage",
+          "target": "PurchaseOrdersObjectPage"
+        },
+        {
+          "pattern": "Suppliers:?query:",
+          "name": "SuppliersList",
+          "target": "SuppliersList"
+        },
+        {
+          "pattern": "Products:?query:",
+          "name": "ProductsList",
+          "target": "ProductsList"
         }
       ],
       "targets": {
@@ -168,6 +188,24 @@
                       "visible": true,
                       "enabled": true,
                       "text": "Dashboard"
+                    },
+                    "OpenOrders": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenOrders",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Siparişler"
+                    },
+                    "OpenSuppliers": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenSuppliers",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Tedarikçiler"
+                    },
+                    "OpenProducts": {
+                      "press": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.StockActions.onOpenProducts",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Ürünler"
                     }
                   }
                 }
@@ -254,6 +292,9 @@
           },
           "sap.fe.templates.ObjectPage.ObjectPageController#customer.supplychaincopilot.supplychaincopilotui::StockLevelsObjectPage": {
             "controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.ObjectPageExt"
+          },
+          "sap.fe.templates.ListReport.ListReportController#customer.supplychaincopilot.supplychaincopilotui::SuppliersList": {
+            "controllerName": "customer.supplychaincopilot.supplychaincopilotui.ext.controller.SupplierExt"
           }
         }
       }
