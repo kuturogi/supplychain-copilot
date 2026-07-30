@@ -5,9 +5,31 @@ spring:
   sql.init.platform: h2
 cds:
   data-source.auto-config.enabled: false
+  # Yerel geliştirme: XSUAA bağlı olmadığından mock kullanıcılar devreye girer.
+  # Tarayıcı basic-auth soracaktır — kullanıcı adı ve parola aynıdır.
+  #   viewer / viewer     → salt okunur
+  #   planner / planner   → + stok güncelleme, sipariş oluşturma
+  #   approver / approver → + sipariş onay/teslim/iptal
+  # Bulutta (cloud profili) bu blok devre dışıdır; yetkiler XSUAA'dan gelir.
   security:
     mock:
-      enabled: false
+      enabled: true
+      users:
+        viewer:
+          password: viewer
+          roles:
+            - Viewer
+        planner:
+          password: planner
+          roles:
+            - Viewer
+            - Planner
+        approver:
+          password: approver
+          roles:
+            - Viewer
+            - Planner
+            - Approver
 
 # SAP AI Core (Joule altyapısı) bağlantı yapılandırması
 # Bu değerleri BTP AI Core servis anahtarından alıp ortam değişkeni olarak set edin:
@@ -24,6 +46,14 @@ aicore:
   deployment-id: ${AICORE_DEPLOYMENT_ID:}
   resource-group: ${AICORE_RESOURCE_GROUP:default}
 ---
+# Bulut profili: kimlik doğrulama XSUAA üzerinden yapılır, mock kullanıcı yoktur.
+spring:
+  config.activate.on-profile: cloud
+cds:
+  security:
+    mock:
+      enabled: false
+---
 management:
   endpoint:
     health:
@@ -37,4 +67,3 @@ management:
     defaults.enabled: false
     ping.enabled: true
     db.enabled: true
-    

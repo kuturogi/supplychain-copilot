@@ -1,0 +1,68 @@
+{
+  "xsappname": "supplychain-copilot",
+  "tenant-mode": "dedicated",
+  "description": "Supply Chain Copilot — güvenlik yapılandırması",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Viewer",
+      "description": "Stok, sipariş ve tedarikçi verilerini okur; salt-okunur AI analizlerini çalıştırır"
+    },
+    {
+      "name": "$XSAPPNAME.Planner",
+      "description": "Stok seviyelerini günceller ve sipariş taslağı oluşturur"
+    },
+    {
+      "name": "$XSAPPNAME.Approver",
+      "description": "Siparişleri onaylar, teslim edildi olarak işaretler ve iptal eder"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "SupplyChainViewer",
+      "description": "Salt okunur erişim",
+      "scope-references": [
+        "$XSAPPNAME.Viewer"
+      ]
+    },
+    {
+      "name": "SupplyChainPlanner",
+      "description": "Stok planlama ve sipariş oluşturma",
+      "scope-references": [
+        "$XSAPPNAME.Viewer",
+        "$XSAPPNAME.Planner"
+      ]
+    },
+    {
+      "name": "SupplyChainApprover",
+      "description": "Sipariş onay akışı (planlama yetkilerini de kapsar)",
+      "scope-references": [
+        "$XSAPPNAME.Viewer",
+        "$XSAPPNAME.Planner",
+        "$XSAPPNAME.Approver"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "SupplyChainCopilot_Viewer",
+      "description": "Supply Chain Copilot — Görüntüleyici",
+      "role-template-references": [
+        "$XSAPPNAME.SupplyChainViewer"
+      ]
+    },
+    {
+      "name": "SupplyChainCopilot_Planner",
+      "description": "Supply Chain Copilot — Planlamacı",
+      "role-template-references": [
+        "$XSAPPNAME.SupplyChainPlanner"
+      ]
+    },
+    {
+      "name": "SupplyChainCopilot_Approver",
+      "description": "Supply Chain Copilot — Onaylayıcı",
+      "role-template-references": [
+        "$XSAPPNAME.SupplyChainApprover"
+      ]
+    }
+  ]
+}
