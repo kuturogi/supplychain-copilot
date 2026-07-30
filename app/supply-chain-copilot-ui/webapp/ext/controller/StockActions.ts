@@ -19,6 +19,7 @@ import HTML from "sap/ui/core/HTML";
 import { openAIResultDialog, runWithBusy, formatAIText } from "../util/AIResponseDialog";
 import { exportCriticalStocks, exportAllStocks } from "../util/ExportHelper";
 import { buildPieChart, buildHorizontalBarChart, buildFunnelChart } from "../util/ChartBuilder";
+import { escapeHtml } from "../util/Html";
 
 /**
  * Fiori Elements custom action handler modülü.
@@ -196,7 +197,7 @@ function buildMessageItem(msg: ChatMessage): CustomListItem {
 
     const bubble = new FormattedText({
         htmlText: isUser
-            ? "<p>" + msg.text.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</p>"
+            ? "<p>" + escapeHtml(msg.text) + "</p>"
             : formatAIText(msg.text)
     }).addStyleClass(isUser ? "stChatBubbleUser" : "stChatBubbleAssistant");
 
@@ -450,8 +451,8 @@ function _buildKpiHtml(rows: StoreSummaryRow[]): string {
         const isCrit = r.criticalCount > 0;
         return `<div class="stSparkRow2 ${isCrit ? "stSparkRow2--crit" : ""}">
             <div class="stSparkRow2__info">
-                <span class="stSparkRow2__name">${r.storeName}</span>
-                <span class="stSparkRow2__loc">📍 ${r.location}</span>
+                <span class="stSparkRow2__name">${escapeHtml(r.storeName)}</span>
+                <span class="stSparkRow2__loc">📍 ${escapeHtml(r.location)}</span>
             </div>
             <div class="stSparkRow2__track">
                 <div class="stSparkRow2__fill" style="width:${pct}%;background:${isCrit ? "#e05a5a" : "#4f8ef7"}"></div>
@@ -607,7 +608,7 @@ export async function _openDashboardDialog(model: ODataModel): Promise<void> {
         kpiContainer.setContent(_buildKpiHtml(rows));
         chartContainer.setContent(_buildChartsHtml(rows, products, stockLevels, orders, suppliers));
     } catch (e) {
-        loadingHtml.setContent(`<div style="padding:1rem;color:#bb0000">Veri yüklenemedi: ${e}</div>`);
+        loadingHtml.setContent(`<div style="padding:1rem;color:#bb0000">Veri yüklenemedi: ${escapeHtml(e)}</div>`);
         console.error("Dashboard veri hatası:", e);
     }
 }

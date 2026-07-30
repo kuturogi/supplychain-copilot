@@ -3,18 +3,12 @@
  * Modern, animasyonlu, enterprise kalitesinde grafikler.
  */
 
+import { escapeHtml as esc } from "./Html";
+
 const PALETTE = [
     "#4f8ef7", "#34c38f", "#f4a534", "#e05a5a", "#a78bfa",
     "#22c4c4", "#f97316", "#84cc16", "#e879f9", "#38bdf8"
 ];
-
-function esc(s: string): string {
-    return String(s)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-}
 
 function num(n: number): string {
     return n.toLocaleString("tr-TR");
@@ -134,14 +128,14 @@ export function buildHorizontalBarChart(
 
         <rect x="${labelW}" y="${y}" width="${barAreaW}" height="${barH1}" rx="4" fill="#f0f0f0"/>
         <rect x="${labelW}" y="${y}" width="${bw1}" height="${barH1}" rx="4" fill="url(#${gradId1})" class="stBarAnim">
-            <title>${item.tooltip ?? item.label + ": " + num(item.value)}</title>
+            <title>${esc(item.tooltip ?? item.label + ": " + num(item.value))}</title>
         </rect>
         <text x="${labelW + bw1 + 5}" y="${y + barH1 / 2 + 4}" font-size="9" fill="#555" font-weight="600">${num(item.value)}</text>
 
         ${hasSeries2 && item.value2 !== undefined ? `
         <rect x="${labelW}" y="${y + barH1 + 4}" width="${barAreaW}" height="${barH2}" rx="3" fill="#f0f0f0"/>
         <rect x="${labelW}" y="${y + barH1 + 4}" width="${bw2}" height="${barH2}" rx="3" fill="url(#${gradId2})" opacity="0.85" class="stBarAnim">
-            <title>${item.tooltip2 ?? item.label + ": " + num(item.value2)}</title>
+            <title>${esc(item.tooltip2 ?? item.label + ": " + num(item.value2))}</title>
         </rect>
         <text x="${labelW + bw2 + 5}" y="${y + barH1 + 4 + barH2 / 2 + 4}" font-size="8" fill="#777">${num(item.value2)}</text>
         ` : ""}`;

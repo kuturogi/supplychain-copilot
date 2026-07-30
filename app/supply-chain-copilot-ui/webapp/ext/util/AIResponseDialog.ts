@@ -6,6 +6,7 @@ import FormattedText from "sap/m/FormattedText";
 import Button from "sap/m/Button";
 import BusyDialog from "sap/m/BusyDialog";
 import MessageToast from "sap/m/MessageToast";
+import { escapeHtml } from "./Html";
 
 /**
  * AI aksiyonlarının (analyzeStockWithAI, forecastDemand, createPurchaseOrder,
@@ -33,15 +34,6 @@ const SECTION_HEADER_RE = /^[A-ZÇĞİÖŞÜ0-9][A-ZÇĞİÖŞÜ0-9 /()%.,:+-]*:
 const NUMBERED_RE = /^(\d+)\.\s+(.*)$/;
 const BULLET_RE = /^-\s+(.*)$/;
 const UNDERLINE_RE = /^=+$/;
-
-function escapeHtml(input: string): string {
-    return input
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-}
 
 /**
  * Backend'den gelen sabit anahtar kelimeleri <strong>/<em> ile öne çıkarır.
